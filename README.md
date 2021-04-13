@@ -1,1 +1,1 @@
-# Anime-Database-MAL-
+# MAL Databases
