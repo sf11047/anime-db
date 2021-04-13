@@ -1,2 +1,4 @@
-setup.sql
-setup-small.sql
+#Ignore changes to setup scripts
+
+/setup.sql
+/setup-small.sql
