@@ -209,3 +209,35 @@ WITH StudioEpisodeCount AS (
 )
 SELECT StudioEpisodeCount.studioName, StudioEpisodeCount.totalEpisodes 
 FROM MaxEpisodeCount JOIN StudioEpisodeCount ON MaxEpisodeCount.maxEps = StudioEpisodeCount.totalEpisodes;
+
+
+-- number anime viewers grouped by age, which age group has most viewers?
+SELECT TIMESTAMPDIFF(year, Users.birthDate, NOW()) AS age, Users.userName
+FROM Users
+WHERE Users.birthDate IS NOT NULL;
+
+WITH Ages AS (
+        SELECT TIMESTAMPDIFF(year, Users.birthDate, NOW()) AS age, Users.userName
+        FROM Users
+        WHERE Users.birthDate IS NOT NULL
+)
+SELECT Ages.age, COUNT(*) AS numPeople
+FROM Ages
+GROUP BY Ages.age;
+
+-- Max Age Group
+WITH Ages AS (
+        SELECT TIMESTAMPDIFF(year, Users.birthDate, NOW()) AS age, Users.userName
+        FROM Users
+        WHERE Users.birthDate IS NOT NULL
+), AgeCount AS (
+        SELECT Ages.age, COUNT(*) AS numPeople
+        FROM Ages
+        GROUP BY Ages.age
+), maxNumPeople AS (
+        SELECT MAX(AgeCount.numPeople) AS maxNum
+        FROM AgeCount
+)
+SELECT AgeCount.age, AgeCount.numPeople AS numUsers
+FROM AgeCount JOIN maxNumPeople ON AgeCount.numPeople = maxNumPeople.maxNum;
+
