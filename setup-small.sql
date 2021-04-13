@@ -102,7 +102,7 @@ CREATE TABLE Animates (
         FOREIGN KEY (mediaID) REFERENCES Media(mediaID)
 );
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/titles_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/titles_small.csv'
 INTO TABLE Titles 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -110,14 +110,14 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, titleENG);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/media_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/media_small.csv'
 INTO TABLE Media 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/tv_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/tv_small.csv'
 INTO TABLE TV 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -125,7 +125,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, rank, synopsis, source, mediaID, startDate, numEpisodes, endDate);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/movies_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/movies_small.csv'
 INTO TABLE Movie 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -133,7 +133,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, rank, synopsis, source, mediaID, startDate);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/ova_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/ova_small.csv'
 INTO TABLE OVA 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -141,7 +141,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, rank, synopsis, source, mediaID, startDate);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/users_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/users_small.csv'
 INTO TABLE Users 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -149,7 +149,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (birthDate, username, location, gender);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/reviews_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/reviews_small.csv'
 INTO TABLE Reviews 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -157,7 +157,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (mediaID, username, text, overallRating, characterRating, storyRating, animationRating, enjoymentRating, soundRating);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/set_status_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/set_status_small.csv'
 INTO TABLE SetStatus 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -165,14 +165,14 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (username, mediaID, status, rewatch, statusStartDate, statusEndDate);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/genre_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/genre_small.csv'
 INTO TABLE Genre 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/belongs_to_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/belongs_to_small.csv'
 INTO TABLE BelongsTo 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -180,14 +180,14 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (mediaID, genreName);
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/studio_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/studio_small.csv'
 INTO TABLE Studio 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE 'C:/Users/zongm/CS/db/Anime-Database-MAL-/animates_small.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/animates_small.csv'
 INTO TABLE Animates 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'

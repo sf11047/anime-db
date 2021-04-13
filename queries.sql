@@ -164,4 +164,172 @@ WITH Ages AS (
 SELECT AgeCount.age, AgeCount.numPeople AS numUsers
 FROM AgeCount JOIN maxNumPeople ON AgeCount.numPeople = maxNumPeople.maxNum;
 
+-- 9. How many new anime created each year?
+-- Based on startDate, seasons of continuing show count as "1 anime". Includes Movies and OVA. Ordered by most recent year first.
+SELECT year(startDate) AS 'year', count(year(startDate)) AS 'count'
+FROM AllMedia
+WHERE startDate IS NOT NULL
+GROUP BY year(startDate)
+ORDER BY year DESC;
+
+-- 10. Most popular source(s) of anime?
+-- Can have ties
+WITH Sources AS (
+        SELECT source, count(source) AS 'sourceCount'
+        FROM AllMedia
+        GROUP BY source)
+SELECT source, sourceCount
+FROM Sources
+WHERE sourceCount = (SELECT MAX(sourceCount) FROM Sources);
+
+ 
+-- 11. What anime have the best animation? Best story? Best characters?
+-- Includes all media, shows an average sub rating. Shows the top 20 anime based on their average sub ratings, high to low. 
+
+-- 11a. story
+WITH MediaRating AS (
+        SELECT AllMedia.mediaID AS 'mediaID', AllMedia.titleJPN AS 'titleJPN', AVG(storyRating) AS 'story'
+        FROM Reviews
+        LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
+        GROUP BY mediaID
+)
+SELECT mediaID, titleJPN, story AS 'avgRating'
+FROM MediaRating
+ORDER BY story DESC
+LIMIT 20;
+
+-- 11b. animation
+WITH MediaRating AS (
+        SELECT AllMedia.mediaID AS 'mediaID', AllMedia.titleJPN AS 'titleJPN', AVG(animationRating) AS 'animation'
+        FROM Reviews
+        LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
+        GROUP BY mediaID
+)
+SELECT mediaID, titleJPN, animation AS 'avgRating'
+FROM MediaRating
+ORDER BY animation DESC
+LIMIT 20;
+
+-- 11c. character
+WITH MediaRating AS (
+        SELECT AllMedia.mediaID AS 'mediaID', AllMedia.titleJPN AS 'titleJPN', AVG(characterRating) AS 'characterR'
+        FROM Reviews
+        LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
+        GROUP BY mediaID
+)  
+SELECT mediaID, titleJPN, characterR AS 'avgRating'
+FROM MediaRating
+ORDER BY characterR DESC
+LIMIT 20;
+
+-- 12. Which anime are being rewatched the most?
+-- Shows top 20
+WITH Rewatched AS (
+        SELECT AllMedia.mediaID AS 'mediaID', titleJPN, count(rewatch) AS 'rewatchCount'
+        FROM SetStatus
+        LEFT JOIN AllMedia ON AllMedia.mediaID = SetStatus.mediaID
+        WHERE rewatch = 1
+        GROUP BY mediaID)
+SELECT mediaID, titleJPN, rewatchCount
+FROM Rewatched
+ORDER BY rewatchCount DESC
+LIMIT 20;
+
+-- 13. How many people completed more shows than they plan to watch and vice versa?
+-- 13a. completed > plan to watch
+WITH Completed AS (
+        SELECT username, count(status) AS 'cc'
+        FROM SetStatus
+        WHERE status LIKE "completed"
+        GROUP BY username
+        ),
+Plan AS (
+        SELECT username, count(status) AS 'pc'
+        FROM SetStatus
+        WHERE status LIKE "plan to watch"
+        GROUP BY username)
+SELECT count(Completed.username) AS 'count'
+FROM Completed
+LEFT JOIN Plan ON Completed.username = Plan.username
+WHERE cc > pc OR pc IS NULL;
+
+-- 13b. plan to watch > completed
+WITH Completed AS (
+        SELECT username, count(status) AS 'cc'
+        FROM SetStatus
+        WHERE status LIKE "completed"
+        GROUP BY username
+        ),
+Plan AS (
+        SELECT username, count(status) AS 'pc'
+        FROM SetStatus
+        WHERE status LIKE "plan to watch"
+        GROUP BY username)
+SELECT count(Completed.username) AS 'count'
+FROM Plan
+LEFT JOIN Completed ON Completed.username = Plan.username
+WHERE cc < pc OR cc IS NULL;
+
+-- 14. Which genre has the most anime? The most viewers?
+-- Most anime, shows top 5.
+WITH GenreCount AS (
+        SELECT genreName, count(mediaID) AS 'count'
+        FROM BelongsTo
+        GROUP BY genreName)
+SELECT genreName, count AS 'count'
+FROM GenreCount
+ORDER BY count DESC
+LIMIT 5;
+
+-- Most Viewers. Based on status being completed, on hold or watching. Shows top 5
+WITH ShowCount AS (
+        SELECT mediaID, count(username) AS 'countS'
+        FROM SetStatus
+        WHERE status LIKE "completed" OR status LIKE "watching" OR status LIKE "on hold"
+        GROUP BY mediaID
+),
+GenreCount AS (
+        SELECT genreName, sum(countS) AS 'count'
+        FROM ShowCount
+        LEFT JOIN BelongsTo ON BelongsTo.mediaID = ShowCount.mediaID
+        GROUP BY genreName
+)
+SELECT genreName, count AS 'count'
+FROM GenreCount
+WHERE genreName IS NOT NULL
+ORDER BY count DESC
+LIMIT 5;
+
+-- 15. How many shows do people watch at once? Average? Max? Min?
+-- Based on status being watching, not including on hold.
+
+-- 15a. Average
+WITH Watching AS (
+        SELECT username, count(status) AS 'watching'
+        FROM SetStatus
+        WHERE status LIKE "watching"
+        GROUP BY username)
+SELECT avg(watching) AS 'average'
+FROM Watching;
+
+-- 15b. Max
+WITH Watching AS (
+        SELECT username, count(status) AS 'watching'
+        FROM SetStatus
+        WHERE status LIKE "watching"
+        GROUP BY username)
+SELECT max(watching) AS 'max'
+FROM Watching;
+
+-- 15c. Min. Not including users than are watching nothing, which would be 0.
+-- Kind of useless sub question since it will most likely be 1.
+WITH Watching AS (
+        SELECT username, count(status) AS 'watching'
+        FROM SetStatus
+        WHERE status LIKE "watching"
+        GROUP BY username)
+SELECT min(watching) AS 'min'
+FROM Watching;
+
+
 
