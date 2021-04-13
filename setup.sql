@@ -102,7 +102,7 @@ CREATE TABLE Animates (
         FOREIGN KEY (mediaID) REFERENCES Media(mediaID)
 );
 
-LOAD DATA LOCAL INFILE '/titles.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/titles.csv'
 INTO TABLE Titles 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -110,14 +110,14 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, titleENG);
 
-LOAD DATA LOCAL INFILE '/media.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/media.csv'
 INTO TABLE Media 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE '/tv.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/tv.csv'
 INTO TABLE TV 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -125,7 +125,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, rank, synopsis, source, numEpisodes, mediaID, startDate, endDate);
 
-LOAD DATA LOCAL INFILE '/movie.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/movie.csv'
 INTO TABLE Movie 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -133,7 +133,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, rank, synopsis, source, mediaID, startDate);
 
-LOAD DATA LOCAL INFILE '/ova.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/ova.csv'
 INTO TABLE OVA 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -141,7 +141,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (titleJPN, rank, synopsis, source, mediaID, startDate);
 
-LOAD DATA LOCAL INFILE '/users.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/users.csv'
 INTO TABLE Users 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -149,14 +149,14 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (birthDate, username, location, gender);
 
-LOAD DATA LOCAL INFILE '/genre.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/genre.csv'
 INTO TABLE Genre 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE '/belongs_to.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/belongs_to.csv'
 INTO TABLE BelongsTo 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -164,14 +164,14 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (mediaID, genreName);
 
-LOAD DATA LOCAL INFILE '/studio.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/studio.csv'
 INTO TABLE Studio 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
 
-LOAD DATA LOCAL INFILE '/animates.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/animates.csv'
 INTO TABLE Animates 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -179,7 +179,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (mediaID, studioName);
 
-LOAD DATA LOCAL INFILE '/set_status.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/set_status.csv'
 INTO TABLE SetStatus 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
@@ -187,7 +187,7 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (mediaID, username, statusStartDate, statusEndDate, rewatch, status);
 
-LOAD DATA LOCAL INFILE '/reviews.csv'
+LOAD DATA LOCAL INFILE '/Users/anthony/data/reviews.csv'
 INTO TABLE Reviews 
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"'
