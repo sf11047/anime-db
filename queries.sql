@@ -272,7 +272,7 @@ LEFT JOIN Completed ON Completed.username = Plan.username
 WHERE cc < pc OR cc IS NULL;
 
 -- 14. Which genre has the most anime? The most viewers?
--- Most anime, shows top 5.
+-- 14a. Most anime, shows top 5.
 WITH GenreCount AS (
         SELECT genreName, count(mediaID) AS 'count'
         FROM BelongsTo
@@ -282,7 +282,7 @@ FROM GenreCount
 ORDER BY count DESC
 LIMIT 5;
 
--- Most Viewers. Based on status being completed, on hold or watching. Shows top 5
+-- 14b. Most Viewers. Based on status being completed, on hold or watching. Shows top 5
 WITH ShowCount AS (
         SELECT mediaID, count(username) AS 'countS'
         FROM SetStatus
