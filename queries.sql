@@ -173,10 +173,11 @@ GROUP BY year(startDate)
 ORDER BY year DESC;
 
 -- 10. Most popular source(s) of anime?
--- Can have ties
+-- Can have ties, ignore Unkown sources.
 WITH Sources AS (
         SELECT source, count(source) AS 'sourceCount'
         FROM AllMedia
+        WHERE source NOT LIKE "Unknown"
         GROUP BY source)
 SELECT source, sourceCount
 FROM Sources
