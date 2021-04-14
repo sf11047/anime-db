@@ -21,7 +21,7 @@ SELECT PopularByGenre.genreName, AllMedia.mediaID, AllMedia.titleJPN, AllMedia.s
 FROM BelongsTo JOIN AllMedia ON BelongsTo.mediaID = AllMedia.mediaID JOIN PopularByGenre ON PopularByGenre.genreName = BelongsTo.genreName AND PopularByGenre.rank = AllMedia.rank;
 
 -- 2. How many of the most popular shows were based on mangas as opposed to being original creations?
--- Most popular shows is ambigious wording, so in this case I am going to count it as
+-- Most popular shows is ambiguous wording, so in this case I am going to count it as
 -- any show whose rank is less than 1000 (considering that ranks go beyond 12000)
 SELECT AllMedia.source AS sourceType, COUNT(AllMedia.mediaID) AS numShows
 FROM AllMedia
@@ -85,7 +85,7 @@ WITH maxEpisodes AS (
 SELECT TV.titleJPN, TV.numEpisodes, TV.synopsis
 FROM maxEpisodes JOIN TV ON maxEpisodes.epCount = TV.numEpisodes;
 
--- 6b. Longest runnning by time
+-- 6b. Longest running by time
 WITH RunTime AS (
         SELECT TIMESTAMPDIFF(day, TV.startDate, TV.endDate) AS daysRun, TV.titleJPN, TV.synopsis
         FROM TV 
@@ -173,7 +173,7 @@ GROUP BY year(startDate)
 ORDER BY year DESC;
 
 -- 10. Most popular source(s) of anime?
--- Can have ties, ignore Unkown sources.
+-- Can have ties, ignore Unknown sources.
 WITH Sources AS (
         SELECT source, count(source) AS 'sourceCount'
         FROM AllMedia
