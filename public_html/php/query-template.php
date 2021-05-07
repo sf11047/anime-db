@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    
-</body>
-</html>
+    <div class="welcome">
+        <h1>Anime DB</h1>
+        <p>
+            About Blurb
+        </p>
+    </div>
+
+    <a href="../adas22_sfu12.html">Go Home</a> <!-- TODO Make Nicer-->
+
+    <div class="query-section">
+
+
