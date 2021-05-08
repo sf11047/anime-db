@@ -10,7 +10,13 @@ include '../php/open.php';
     echo "<h1>".$query."<h1>";
     
     $myQuery = "SELECT * FROM TV Limit 5;";
-   
+    if ($result = mysqli_query($conn, $myQuery)){
+        foreach($result as $row){
+        //to improve the look of the output, we could add html table
+    //tags too, which would add border lines, center the values, etc.
+        echo $row["titleJPN"]." ".$row["id"]."<br>";
+        }
+    }
 
     $test = "Finished";
     echo $test;
