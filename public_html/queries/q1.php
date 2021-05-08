@@ -12,6 +12,10 @@ include '../php/open.php';
     $myQuery = "SELECT * FROM TV Limit 5;";
     $stmt= $conn->prepare($myQuery);
     $stmt->execute();
+    $result = $stmt->get_result(); 
+    while ($row = $result->fetch_assoc()) {
+        echo $row['titleJPN'];
+    }
 
     echo "done";
     //if ($result = mysqli_query($conn, $myQuery)){
