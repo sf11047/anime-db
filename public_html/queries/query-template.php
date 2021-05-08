@@ -9,13 +9,9 @@
 </head>
 <body>
     <div class="welcome">
-        <h1>Anime DB</h1>
-        <p>
-            About Blurb
-        </p>
+        <h1>Information</h1>
+        <a href="../adas22_sfu12.html">Go Home</a> <!-- TODO Make Nicer-->
     </div>
-
-    <a href="../adas22_sfu12.html">Go Home</a> <!-- TODO Make Nicer-->
 
     <div class="query-section">
 
