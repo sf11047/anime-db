@@ -16,7 +16,7 @@ include '../php/open.php';
     
     
     if ($genreSelection == "All") {
-        echo substr($myQuery, 0, 100);
+        echo substr($myQuery, 0, 200);
     }
     
     $stmt= $conn->prepare($myQuery);
