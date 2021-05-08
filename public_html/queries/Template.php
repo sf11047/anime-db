@@ -1,9 +1,11 @@
 
 <?php
 
-include "query-template.php"; //HTML Template
+include "../php/query-template.php"; //HTML Template
 
-//Insert Query Code Below
+include '../php/open.php';
+
+//Begin Query Code
 
     echo "<h1>".$query."<h1>"; //First line should be the question
 
@@ -11,6 +13,7 @@ include "query-template.php"; //HTML Template
 
 //End Query Code
 
-include "query-template-end.php"; //HTML Template
+$conn->close();
 
+include "../php/query-template-end.php"; //HTML Template
 ?>

@@ -1,11 +1,17 @@
-
 <?php
 
-include "query-template.php";
+include "../php/query-template.php"; //HTML Template
 
-$query = "Test Question";
-echo "<h1>".$query."<h1>";
+include '../php/open.php';
 
-include "query-template-end.php";
+//Begin Query Code
 
+    $query = "Test Question";
+    echo "<h1>".$query."<h1>";
+
+//End Query Code
+
+$conn->close();
+
+include "../php/query-template-end.php"; //HTML Template
 ?>
