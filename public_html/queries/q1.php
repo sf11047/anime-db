@@ -8,14 +8,13 @@ include '../php/open.php';
 
     $query = "Test Question";
     echo "<h1>".$query."<h1>";
+    
+    $myQuery = "SELECT * FROM TV Limit 5;";
 
+   
 
-    $stmt = $conn->prepare("SELECT * FROM TV LIMIT 5");
-    $stmt->execute();
-    $result = $stmt->get_result();
-    echo $result;
-
-    echo "finished";
+    $test = "Finished";
+    echo $test;
 //End Query Code
 
 $conn->close();
