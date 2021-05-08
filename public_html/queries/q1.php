@@ -7,7 +7,7 @@ include "query-template.php";
 
 //Do Query Stuff
 $query = "Test Question";
-echo "<h1>"+$query+"<h1>";
+echo "<h1>".$query."<h1>";
 
 include "query-template-end.php";
 
