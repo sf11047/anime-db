@@ -5,7 +5,6 @@
 
 include "query-template.php";
 
-//Do Query Stuff
 $query = "Test Question";
 echo "<h1>".$query."<h1>";
 
