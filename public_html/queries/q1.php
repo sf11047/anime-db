@@ -16,9 +16,8 @@ include '../php/open.php';
     $stmt = $conn->prepare($myQuery); 
     $stmt->execute();
     $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        echo $row['genreName'];
-    }
+    $user = $result->fetch_assoc();
+    echo $user["genreName"];
 
     echo "Finished";
 
