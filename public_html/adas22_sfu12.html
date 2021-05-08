@@ -23,7 +23,14 @@
             <div class="query-card">
                 <p>Question</p>
                 <form action="queries/q1.php" method="post">
-                    Test: <input type="text" name="Test"> <br/>
+                    <label for="cars">Choose a genre:</label>
+
+                    <select name="cars" id="cars">
+                      <option value="Action">Action</option>
+                      <option value="Shounen">Shounen</option>
+                      <option value="Mystery">Mystery</option>
+                      <option value="Detective">Detective</option>
+                    </select>
                     <input type="submit">
                 </form>
             </div>

@@ -14,20 +14,11 @@ include '../php/open.php';
     $stmt->execute();
     $result = $stmt->get_result(); 
     while ($row = $result->fetch_assoc()) {
-        echo $row['genreName'];
+        echo $row['genreName']." ";
+        echo $row['titleJPN']."<br></br>";
     }
 
-    echo "done";
-    //if ($result = mysqli_query($conn, $myQuery)){
-        //foreach($result as $row){
-        //to improve the look of the output, we could add html table
-    //tags too, which would add border lines, center the values, etc.
-        //echo $row["titleJPN"]." ".$row["mediaID"]."<br>";
-        //}
-    //}
 
-    $test = "Finished";
-    echo $test;
 //End Query Code
 
 $conn->close();
