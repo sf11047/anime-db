@@ -22,7 +22,7 @@ include '../php/open.php';
     }
 
 
-
+    echo "Finished";
 
 //End Query Code
 
