@@ -6,8 +6,7 @@
 include "query-template.php";
 
 //Do Query Stuff
-
-echo "hello";
+//echo "hello";
 
 include "query-template-end.php";
 
