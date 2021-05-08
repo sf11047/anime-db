@@ -10,7 +10,6 @@ include '../php/open.php';
     echo "<h1>".$query."<h1>";
     
     $myQuery = "SELECT * FROM TV Limit 5;";
-
    
 
     $test = "Finished";
