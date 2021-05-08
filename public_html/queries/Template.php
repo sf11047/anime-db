@@ -1,6 +1,4 @@
 
-<head><title>Hw4 ShowRawScores</title></head>
-<body>
 <?php
 
 include "query-template.php"; //HTML Template
@@ -16,4 +14,3 @@ include "query-template.php"; //HTML Template
 include "query-template-end.php"; //HTML Template
 
 ?>
-</body>
