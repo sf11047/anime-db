@@ -16,7 +16,6 @@ include '../php/open.php';
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        echo "<h2>".$row['sourceType']."</h2>";
         array_push($dataPoints, array( "label"=> $row["sourceType"], "y"=> $row["numShows"]));
     }
     
