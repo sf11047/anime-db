@@ -24,7 +24,7 @@ include '../php/open.php';
 
 echo "<script>
 window.onload = function () { 
-    var chart = new CanvasJS.Chart("chartContainer", {
+    var chart = new CanvasJS.Chart('chartContainer', {
         animationEnabled: false,
         exportEnabled: true,
         theme: 'light1', 
