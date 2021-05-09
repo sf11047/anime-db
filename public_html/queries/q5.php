@@ -11,12 +11,12 @@ include '../php/open.php';
 
     $dataPoints = array();
 
-    $myQuery = "CALL PopularSource();";
+    $myQuery = "HighestReviewCategory();";
     $stmt = $conn->prepare($myQuery); 
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["sourceType"], "y"=> $row["numShows"]));
+        array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
     }
     
 //End Query Code
@@ -27,9 +27,9 @@ include '../php/open.php';
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: false,
                 exportEnabled: true,
-                theme: "light1", // "light1", "light2", "dark1", "dark2"
+                theme: "dark1", // "light1", "light2", "dark1", "dark2"
                 title:{
-                    text: "Most Popular Anime Sources"
+                    text: "Number of Shows Most Highly Reviewed In Each Review Category"
                 },
                 data: [{
                     type: "column", //change type to column, bar, line, area, pie, etc  
