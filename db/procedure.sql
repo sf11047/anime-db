@@ -36,3 +36,19 @@ GROUP BY AllMedia.source;
 END; //
 
 DELIMITER ;
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS PopularStudios //
+
+CREATE PROCEDURE PopularStudios()
+BEGIN
+SELECT AVG(AllMedia.rank) AS avgShowRank, Animates.studioName 
+FROM AllMedia JOIN Animates ON AllMedia.mediaID = Animates.mediaID
+WHERE AllMedia.rank IS NOT NULL
+GROUP BY Animates.studioName
+ORDER BY avgShowRank ASC
+LIMIT 50;
+END; //
+
+DELIMITER ;

@@ -1,6 +1,8 @@
 -- Team Members: Samantha Fu (sfu12) & Anthony Das (adas22)
 SHOW PROCEDURE STATUS;
 
+CALL PopularSource();
+
 CALL PopByGenre("Action");
 
 SELECT Genre.genreName FROM Genre;
