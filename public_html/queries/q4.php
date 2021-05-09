@@ -21,7 +21,8 @@ include '../php/open.php';
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         if ($stat == "All") {
-            echo "<h1> Status: ".$row['status']." Users with Status: ".$row['usersWithStatus']."<h1>";
+            echo "<h1> Status: ".$row['status']."</h1>" 
+            echo "<h1> Users with Status: ".$row['usersWithStatus']."</h1>";
         }
         echo "<h2>".$row['titleJPN']."</h2>";
         echo "<h3> Rank: ".$row['rank']."</h3>";
