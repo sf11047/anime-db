@@ -19,16 +19,15 @@ include '../php/open.php';
     $result1 = $stmt1->get_result();
     while ($row = $result1->fetch_assoc()) {
         echo "<h1> Max Number of Viewers: ".$row['numUsers']."</h1>";
+        echo "<h1> Max Age Group: ".$row['age']."</h1>";
     }
 
     $stmt2 = $conn->prepare($myQuery2); 
     $stmt2->execute();
     $result2 = $stmt2->get_result();
-    while ($row = $result2->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["age"], "y"=> $row["numPeople"]));
+    while ($row2 = $result2->fetch_assoc()) {
+        array_push($dataPoints, array( "label"=> $row2["age"], "y"=> $row2["numPeople"]));
     }
-
-    echo "<div id='chartContainer' style='height: 400px; width: 100%;'></div>";
     
 //End Query Code
 
@@ -36,7 +35,7 @@ include '../php/open.php';
 <script>
         window.onload = function () { 
             var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: false,
+                animationEnabled: true,
                 exportEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
@@ -50,6 +49,7 @@ include '../php/open.php';
             chart.render(); 
         }
     </script>
+    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <?php
