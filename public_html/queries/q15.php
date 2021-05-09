@@ -9,8 +9,6 @@ echo "Connected";
 
     echo "<h1>What shows have the best animation? Best story? Best characters?<h1>"; //First line should be the question
 
-    echo "Starting";
-
     $rating = $_POST['q15-rating'];
 
     $myQuery = "Call TopCategoryRating(?);";
@@ -18,6 +16,7 @@ echo "Connected";
     $stmt->bind_param("s", $rating);
     $stmt->execute();
     $result = $stmt->get_result();
+    echo $result;
     while ($row = $result->fetch_assoc()) {
         echo "Looping";
         echo "<h2>".$row['titleJPN']."</h2>";
