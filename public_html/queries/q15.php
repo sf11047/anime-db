@@ -15,10 +15,8 @@ include '../php/open.php';
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        echo "Looping";
-        echo "<h2>".$row['titleJPN']."</h2>";
-        echo "<h2>".$row['avgRating']."</h2>";
-        echo "<h2>".$row['mediaID']."</h2>";
+        echo "<h2> Show: ".$row['titleJPN']."</h2>";
+        echo "<h2> Rating:".$row['avgRating']."/10</h2>";
     }
 
 //End Query PHP Code

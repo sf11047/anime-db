@@ -13,7 +13,7 @@ IF category = "story" THEN
             LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
             GROUP BY mediaID
     )
-    SELECT mediaID, titleJPN, story AS 'avgRating'
+    SELECT titleJPN, story AS 'avgRating'
     FROM MediaRating
     ORDER BY story DESC
     LIMIT 20;
@@ -24,7 +24,7 @@ ELSEIF category = "animation" THEN
             LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
             GROUP BY mediaID
     )
-    SELECT mediaID, titleJPN, animation AS 'avgRating'
+    SELECT titleJPN, animation AS 'avgRating'
     FROM MediaRating
     ORDER BY animation DESC
     LIMIT 20;
@@ -35,7 +35,7 @@ ELSEIF category = "character" THEN
             LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
             GROUP BY mediaID
     )  
-    SELECT mediaID, titleJPN, characterR AS 'avgRating'
+    SELECT titleJPN, characterR AS 'avgRating'
     FROM MediaRating
     ORDER BY characterR DESC
     LIMIT 20;
