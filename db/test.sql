@@ -1,6 +1,12 @@
 -- Team Members: Samantha Fu (sfu12) & Anthony Das (adas22)
 SHOW PROCEDURE STATUS;
 
+CALL AgeGroups();
+
+CALL MostAnimeMade("Episode");
+
+Call MostAnimeMade("Show");
+
 CALL LongestRunning("episode");
 
 CALL LongestRunning("time");

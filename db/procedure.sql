@@ -245,6 +245,7 @@ WITH Ages AS (
 )
 SELECT Ages.age, COUNT(*) AS numPeople
 FROM Ages
+WHERE Ages.age > 7 AND Ages.age < 100
 GROUP BY Ages.age
 ORDER BY Ages.age ASC;
 
