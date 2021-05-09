@@ -1,4 +1,9 @@
 -- Team Members: Samantha Fu (sfu12) & Anthony Das (adas22)
+SHOW PROCEDURE STATUS;
+
+CALL PopByGenre("Action");
+
+SELECT Genre.genreName FROM Genre;
 
 CREATE VIEW AllMedia AS
 SELECT TV.mediaID, TV.titleJPN, TV.synopsis, TV.rank, TV.startDate, TV.source 
