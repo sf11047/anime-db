@@ -11,7 +11,7 @@ include '../php/open.php';
 
     $dataPoints = array();
 
-    $myQuery = "HighestReviewCategory();";
+    $myQuery = "CALL HighestReviewCategory();";
     $stmt = $conn->prepare($myQuery); 
     $stmt->execute();
     $result = $stmt->get_result();
