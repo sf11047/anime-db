@@ -72,4 +72,43 @@ FROM Sources
 WHERE sourceCount = (SELECT MAX(sourceCount) FROM Sources);
 END;//
 
+DROP PROCEDURE IF EXISTS PlanVSComplete //
+
+CREATE PROCEDURE PlanVSComplete(IN opt VARCHAR(10))
+BEGIN
+IF opt = "plan" THEN
+    WITH Completed AS (
+            SELECT username, count(status) AS 'cc'
+            FROM SetStatus
+            WHERE status LIKE "completed"
+            GROUP BY username
+            ),
+    Plan AS (
+            SELECT username, count(status) AS 'pc'
+            FROM SetStatus
+            WHERE status LIKE "plan to watch"
+            GROUP BY username)
+    SELECT count(Completed.username) AS 'count'
+    FROM Plan
+    LEFT JOIN Completed ON Completed.username = Plan.username
+    WHERE cc < pc OR cc IS NULL;
+ELSEIF opt = "completed" THEN
+    WITH Completed AS (
+            SELECT username, count(status) AS 'cc'
+            FROM SetStatus
+            WHERE status LIKE "completed"
+            GROUP BY username
+            ),
+    Plan AS (
+            SELECT username, count(status) AS 'pc'
+            FROM SetStatus
+            WHERE status LIKE "plan to watch"
+            GROUP BY username)
+    SELECT count(Completed.username) AS 'count'
+    FROM Completed
+    LEFT JOIN Plan ON Completed.username = Plan.username
+    WHERE cc > pc OR pc IS NULL;
+END IF;
+END;//
+
 DELIMITER ;
