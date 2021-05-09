@@ -6,18 +6,29 @@ include '../php/open.php';
 
 //Begin Query Code
 
-    $query = "Number of Shows with Higest Rating Per Review Category";
+    $query = "Anime Viewers by Age Groups";
     echo "<h1>".$query."<h1>";
 
     $dataPoints = array();
 
-    $myQuery = "CALL HighestReviewCategory();";
-    $stmt = $conn->prepare($myQuery); 
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
+    $myQuery1 = "CALL MaxAgeGroup();";
+    $myQuery2 = "CALL AgeGroups();";
+
+    $stmt1 = $conn->prepare($myQuery1); 
+    $stmt1->execute();
+    $result1 = $stmt1->get_result();
+    while ($row = $result1->fetch_assoc()) {
+        echo "<h1> Max Number of Viewers: ".$row['numUsers']."</h1>";
     }
+
+    $stmt2 = $conn->prepare($myQuery2); 
+    $stmt2->execute();
+    $result2 = $stmt2->get_result();
+    while ($row = $result2->fetch_assoc()) {
+        array_push($dataPoints, array( "label"=> $row["age"], "y"=> $row["numPeople"]));
+    }
+
+    echo "<div id='chartContainer' style='height: 400px; width: 100%;'></div>";
     
 //End Query Code
 
@@ -32,14 +43,13 @@ include '../php/open.php';
                     text: "Number of Shows Most Highly Reviewed In Each Review Category"
                 },
                 data: [{
-                    type: "column", //change type to column, bar, line, area, pie, etc  
+                    type: "line", //change type to column, bar, line, area, pie, etc  
                     dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
                 }]
             });
             chart.render(); 
         }
     </script>
-    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
 	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <?php
