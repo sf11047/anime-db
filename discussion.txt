@@ -1,0 +1,64 @@
+Members - Samantha Fu (sfu12) & Anthony Das (adas22)
+
+Modifications - Overall, we have made a few modifications since the inception of our project.
+The most notable ones were between phases B & C, when a closer examination of our data revealed
+that some of the restraints and initial assumptions we had made had to be altered. For instance,
+not all japanese titles have direct english translations, and some japanese titles were split by season
+but the english translations were the same since they didn't account for seasons, so titleEng
+is no longer unique. There are also a few minor modifications to some of the queries we wrote in
+Phase D in order to account for the html menu-- for instance, the query accounting for most popular
+show per genre initially gave a table of all genres & the corresponding most popular show,
+but we altered it slightly to also give the option of selecting one genre to find the most popular show 
+for that specfic genre.
+
+Process - 
+
+Sources:
+AnimeList.csv - https://www.kaggle.com/alancmathew/anime-dataset
+animes.csv - https://www.kaggle.com/azathoth42/myanimelist?select=AnimeList.csv
+UserList.csv - https://www.kaggle.com/azathoth42/myanimelist?select=UserList.csv
+profiles.csv - https://www.kaggle.com/marlesson/myanimelist-dataset-animes-profiles-reviews?select=profiles.csv
+reviews.csv - https://www.kaggle.com/marlesson/myanimelist-dataset-animes-profiles-reviews?select=reviews.csv
+UserAnimeList.csv - https://www.kaggle.com/azathoth42/myanimelist?select=UserAnimeList.csv
+
+Process: Our data came from data scraped off the web and as such turned out to be much less 
+well formed than we hoped; we ended up running into many issues while cleaning the data and 
+have had to modify a few parts of our original design to account for these.
+
+We spent most of our time cleaning the data due to its illformed nature; we began with combining 
+our sources to create our media tables, with some shows being examined by hand to deal with discrepencies.
+Once we had our media tables, we broke that information down into our smaller genre, belongsTo, title, 
+animates, and studio tables to populate those. Once our media tables were all created, we shifted to
+the user related tables, combining user information from multiple data sources, and filtering out
+reviews & statuses for shows that arent' in our database. We had to do some parsing in the reviews
+table to extract data from a stringified python dict, in addition to replacing all Nan fields with
+A NULL value, and cleaning some invalid characters in certain fields. 
+
+This is the abridged version of our process from Phase C. Full version can be found here:
+https://docs.google.com/document/d/1rdu4dNK3wyWRf-6XB2bqYW5873fCd8LBOEdtsdYScMk/edit?usp=sharing
+
+Successes - One of the most difficult parts of our project was actually the data cleaning, because
+the data we used was much more malformed than initially expected, due to the fact that it was scraped
+off a website that also does not have much regulation/monitoring. There were several very obscure 
+errors / malformed pieces that required inspection by hand to figure out what the issue was. Some of
+our files were also extremely large and required hours of waiting for the processing to finish. Although
+our code for that portion is not included as part fo the submission, the full version of the process.txt
+from Phase C documents some of it. 
+
+Known Issues - 
+
+Extensions - Currently our html menu only allows for the queries that we wrote, so that if
+someone wishes to know something else beyond our queries, they are unable to find out. In
+the future, we would like to be able to expand the list of queries that someone may be interested
+in, and perhaps give the user the ability to write their own sql queries, since we cannot
+possibly predict everything someone may want to know. Of course, we would have to be careful about
+security considerations if we gave users that level of freedom.
+
+Another feature that we would like add is the ability for a user to simply browse through anime titles
+in a paginated fashion, because otherwise users cannot see what shows we have in our database right now.
+We'd like it to be paginated because there are also too many shows to display at once, so we have to limit
+the aount of data shown at one time. 
+
+
+
+
