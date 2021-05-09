@@ -58,4 +58,18 @@ ORDER BY rewatchCount DESC
 LIMIT 20;
 END;//
 
+DROP PROCEDURE IF EXISTS PopularSource //
+
+CREATE PROCEDURE PopularSource()
+BEGIN
+WITH Sources AS (
+        SELECT source, count(source) AS 'sourceCount'
+        FROM AllMedia
+        WHERE source NOT LIKE "Unknown"
+        GROUP BY source)
+SELECT source, sourceCount
+FROM Sources
+WHERE sourceCount = (SELECT MAX(sourceCount) FROM Sources);
+END;//
+
 DELIMITER ;
