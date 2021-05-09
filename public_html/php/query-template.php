@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Query</title>
     <link rel="stylesheet" href="../style.css">
-    <link rel="text/javascript" href="../canvasjs.min.js">
+    <script rel="text/javascript" href="../canvasjs.min.js"></script>
 </head>
 <body>
     <div class="welcome">
