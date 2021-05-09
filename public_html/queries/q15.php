@@ -3,8 +3,6 @@ include "../php/query-template.php"; //HTML Template
 
 include '../php/open.php';
 
-echo "Connected";
-
 //Begin Query PHP Code
 
     echo "<h1>What shows have the best animation? Best story? Best characters?<h1>"; //First line should be the question
