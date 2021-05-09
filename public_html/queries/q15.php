@@ -13,7 +13,7 @@ include '../php/open.php';
 
     $myQuery = "Call PopByGenre(?);";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $$all);
+    $stmt->bind_param("s", $all);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
