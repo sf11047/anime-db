@@ -1,33 +1,30 @@
 <?php
+
 include "../php/query-template.php"; //HTML Template
 
 include '../php/open.php';
 
-//Begin Query PHP Code
+//Begin Query Code
 
-    echo "<h1>What shows have the best animation? Best story? Best characters?<h1>"; //First line should be the question
+    $query = "Most Popular Anime by Genre";
+    echo "<h1>".$query."<h1>";
+    
 
-    $rating = $_POST['q15-rating'];
+    $rating = $_POST['q15'];
+    $rating  = "All";
 
-    $myQuery = "Call TopCategoryRating(?);";
+    $myQuery = "Call PopByGenre(?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->bind_param("s", $rating);
-    echo "Var: ".$rating." is right?";
     $stmt->execute();
     $result = $stmt->get_result();
-    echo $result;
     while ($row = $result->fetch_assoc()) {
-        echo "Looping";
         echo "<h2>".$row['titleJPN']."</h2>";
-        echo "<h2>".$row['avgRating']."</h2>";
-        echo "<h2>".$row['mediaID']."</h2>";
     }
+    
+//End Query Code
 
-//End Query PHP Code
-
-?>
-
-<?php
 $conn->close();
+
 include "../php/query-template-end.php"; //HTML Template
 ?>
