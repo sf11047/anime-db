@@ -16,8 +16,10 @@ echo "Connected";
     $myQuery = "Call TopCategoryRating(?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->bind_param("s", $rating);
+    echo "Exc";
     $stmt->execute();
     $result = $stmt->get_result();
+    echo "Res";
     while ($row = $result->fetch_assoc()) {
         echo "Looping";
         echo "<h2>".$row['titleJPN']."</h2>";
