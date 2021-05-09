@@ -15,7 +15,7 @@ include '../php/open.php';
         echo "<h2> TIED </h2>";
     }
     while ($row = $result->fetch_assoc()) {
-        echo "<h3>".$row['source']."</h3><p> Number of adaptions:".$row['sourceCount']."</p>";
+        echo "<h2>".$row['source']."</h2><p> Number of adaptions: ".$row['sourceCount']."</p>";
     }
 
 //End Query PHP Code
