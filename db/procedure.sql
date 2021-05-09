@@ -92,3 +92,34 @@ WHERE MaxStatusCount.status != "0" AND MaxStatusCount.status = stat;
 END; //
 
 DELIMITER ;
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS HighestReviewCategory //
+
+CREATE PROCEDURE HighestReviewCategory()
+BEGIN
+WITH BestCategory AS (
+        WITH AvgRatings AS (
+                SELECT AVG(overallRating) AS overall, AVG(storyRating) AS story, AVG(animationRating) AS animation, AVG(characterRating) AS chara, AVG(soundRating) AS sound, AVG(enjoymentRating) AS enjoyment, AllMedia.mediaID 
+                FROM AllMedia JOIN Reviews ON AllMedia.mediaID = Reviews.mediaID
+                WHERE AllMedia.rank <= 1000
+                GROUP BY AllMedia.mediaID
+        )
+        SELECT CASE GREATEST(overall, story, animation, chara, sound, enjoyment)
+                  WHEN overall THEN 'overall'
+                  WHEN story THEN 'story'
+                  WHEN animation THEN 'animation'
+                  WHEN chara THEN 'chara'
+                  WHEN sound THEN 'sound'
+                  WHEN enjoyment THEN 'enjoyment'
+               END AS category, AvgRatings.mediaID
+        FROM AvgRatings
+)
+SELECT COUNT(*) AS numShows, BestCategory.category
+FROM BestCategory
+GROUP BY BestCategory.category;
+END; //
+
+DELIMITER ;
+
