@@ -26,6 +26,7 @@ include '../php/open.php';
 
     $stmt2 = $conn->prepare($myQuery2); 
     $stmt2->execute();
+    echo $stmt2;
     $result2 = $stmt2->get_result();
 
     echo $result2;
