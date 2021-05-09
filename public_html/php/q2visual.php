@@ -17,7 +17,7 @@
                 text: "PHP Line Chart from Database - MySQLi"
             },
             data: [{
-                type: "bar", //change type to column, bar, line, area, pie, etc  
+                type: "column", //change type to column, bar, line, area, pie, etc  
                 dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
             }]
         });
