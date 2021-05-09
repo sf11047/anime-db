@@ -9,21 +9,19 @@ include '../php/open.php';
     $query = "Most Popular Animation Studios";
     echo "<h1>".$query."<h1>";
 
-    $myQuery = "Call PopByGenre(?);";
+    $myQuery = "Call PopularStudios();";
     $stmt = $conn->prepare($myQuery); 
     $stmt->execute();
     $result = $stmt->get_result();
+    echo "<table border =\"2px solid black\">";
+    echo "<tr><td>Studio</td><td>Average Show Rank</td></tr>";
     while ($row = $result->fetch_assoc()) {
-        if ($genreSelection == "All") {
-            echo "<h1> Genre: ".$row['genreName']."<h1>";
-        }
-        echo "<h2>".$row['titleJPN']."</h2>";
-        echo "<h3> Rank: ".$row['rank']."</h3>";
-        echo "<h3> Start Date: ".$row['startDate']."</h3>";
-        echo "<h3> Source: ".$row['source']."</h3>";
-        echo "<p> Rank: ".$row['synopsis']."</p>";
+        echo "<tr>";
+        echo "<td>".$row["studioName"]."</td>";
+        echo "<td>".$row["avgShowRank"]."</td>";
+        echo "</tr>";
     }
-    
+    echo "</table>";
 //End Query Code
 
 $conn->close();
