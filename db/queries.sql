@@ -49,7 +49,7 @@ WITH UserCounts AS (
         FROM UserCounts
         GROUP BY UserCounts.status
 )
-SELECT MaxStatusCount.status, UserCounts.usersWithStatus AS usersWithStatus, AllMedia.titleJPN 
+SELECT MaxStatusCount.status, UserCounts.usersWithStatus AS usersWithStatus, AllMedia.titleJPN, AllMedia.synopsis, AllMedia.rank, AllMedia.source, AllMedia.startDate 
 FROM MaxStatusCount JOIN UserCounts ON MaxStatusCount.status = UserCounts.status AND MaxStatusCount.maxUserCount = UserCounts.usersWithStatus
 JOIN AllMedia ON UserCounts.mediaID = AllMedia.mediaID
 WHERE MaxStatusCount.status != "0";

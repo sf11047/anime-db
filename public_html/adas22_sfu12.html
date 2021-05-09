@@ -86,8 +86,17 @@
             </div>
 
             <div class="query-card">
-                <p>What are the most popular animation studios?</p>
-                <form action="queries/q3.php" method="post">
+                <p>What shows have been watched the most, been planned to watch the most, and been dropped the most?</p>
+                <form action="queries/q4.php" method="post">
+                    <label for="status">Choose a status:</label>
+                    <select name="status" id="status">
+                      <option value="All" selected="selected">All</option>
+                      <option value="plan to watch">Planned to Watch</option>
+                      <option value="watching">Watching</option>
+                      <option value="on hold">On Hold</option>
+                      <option value="dropped">Dropped</option>
+                      <option value="completed">Completed</option>
+                    </select>
                     <input type="submit"> 
                 </form>
             </div>

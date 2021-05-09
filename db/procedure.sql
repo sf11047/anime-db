@@ -52,3 +52,43 @@ LIMIT 50;
 END; //
 
 DELIMITER ;
+
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS PopularByStatus //
+
+CREATE PROCEDURE PopularByStatus(IN stat VARCHAR(30))
+BEGIN
+    IF stat = "All" THEN
+WITH UserCounts AS (
+        SELECT COUNT(SetStatus.mediaID) AS usersWithStatus, SetStatus.mediaID, SetStatus.status
+        FROM SetStatus
+        GROUP BY SetStatus.mediaID, SetStatus.status
+), MaxStatusCount AS (
+        SELECT MAX(UserCounts.usersWithStatus) AS maxUserCount, UserCounts.status
+        FROM UserCounts
+        GROUP BY UserCounts.status
+)
+SELECT MaxStatusCount.status, UserCounts.usersWithStatus AS usersWithStatus, AllMedia.titleJPN, AllMedia.synopsis, AllMedia.rank, AllMedia.source, AllMedia.startDate 
+FROM MaxStatusCount JOIN UserCounts ON MaxStatusCount.status = UserCounts.status AND MaxStatusCount.maxUserCount = UserCounts.usersWithStatus
+JOIN AllMedia ON UserCounts.mediaID = AllMedia.mediaID
+WHERE MaxStatusCount.status != "0";
+    ELSE
+    WITH UserCounts AS (
+        SELECT COUNT(SetStatus.mediaID) AS usersWithStatus, SetStatus.mediaID, SetStatus.status
+        FROM SetStatus
+        GROUP BY SetStatus.mediaID, SetStatus.status
+), MaxStatusCount AS (
+        SELECT MAX(UserCounts.usersWithStatus) AS maxUserCount, UserCounts.status
+        FROM UserCounts
+        GROUP BY UserCounts.status
+)
+SELECT MaxStatusCount.status, UserCounts.usersWithStatus AS usersWithStatus, AllMedia.titleJPN, AllMedia.synopsis, AllMedia.rank, AllMedia.source, AllMedia.startDate 
+FROM MaxStatusCount JOIN UserCounts ON MaxStatusCount.status = UserCounts.status AND MaxStatusCount.maxUserCount = UserCounts.usersWithStatus
+JOIN AllMedia ON UserCounts.mediaID = AllMedia.mediaID
+WHERE MaxStatusCount.status != "0" AND MaxStatusCount.status = stat;
+    END IF;
+END; //
+
+DELIMITER ;
