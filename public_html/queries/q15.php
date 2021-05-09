@@ -10,7 +10,8 @@ include '../php/open.php';
     echo "<h1>".$query."<h1>";
     
 
-    $genreSelection = $_POST['genre'];
+    $genreSelection = $_POST['q15'];
+    $genreSelection  = "All";
     if ($genreSelection != "All") {
         echo "<h1> Genre: ".$genreSelection."<h1>";
     }
