@@ -12,7 +12,7 @@ include '../php/open.php';
     //Rest of query
 
 //End Query PHP Code
-
+    $conn->close();
 ?>
 
 <!-- Begin JS -->
@@ -42,6 +42,5 @@ include '../php/open.php';
 <!-- End JS -->
 
 <?php
-$conn->close();
 include "../php/query-template-end.php"; //HTML Template
 ?>
