@@ -42,4 +42,20 @@ ELSEIF category = "character" THEN
 END IF;
 END; //
 
+DROP PROCEDURE IF EXISTS MostRewatched //
+
+CREATE PROCEDURE MostRewatched()
+BEGIN
+WITH Rewatched AS (
+        SELECT AllMedia.mediaID AS 'mediaID', titleJPN, count(rewatch) AS 'rewatchCount'
+        FROM SetStatus
+        LEFT JOIN AllMedia ON AllMedia.mediaID = SetStatus.mediaID
+        WHERE rewatch = 1
+        GROUP BY mediaID)
+SELECT mediaID, titleJPN, rewatchCount
+FROM Rewatched
+ORDER BY rewatchCount DESC
+LIMIT 20;
+END;//
+
 DELIMITER ;
