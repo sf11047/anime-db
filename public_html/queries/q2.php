@@ -22,23 +22,6 @@ include '../php/open.php';
     
 //End Query Code
 
-echo "<script>
-window.onload = function () { 
-    var chart = new CanvasJS.Chart('chartContainer', {
-        animationEnabled: false,
-        exportEnabled: true,
-        theme: 'light1', 
-        title:{
-            text: 'Popular Show Sources'
-        },
-        data: [{
-            type: 'column', //change type to column, bar, line, area, pie, etc  
-            dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-        }]
-    });
-    chart.render(); 
-}
-</script>";
 
 $conn->close();
 
