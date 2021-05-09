@@ -6,17 +6,27 @@ include '../php/open.php';
 
 //Begin Query Code
 
-    $query = "Number of Shows with Higest Rating Per Review Category";
+    $query = "Anime Viewers by Age Groups";
     echo "<h1>".$query."<h1>";
 
     $dataPoints = array();
 
-    $myQuery = "CALL HighestReviewCategory();";
-    $stmt = $conn->prepare($myQuery); 
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
+    $myQuery1 = "CALL MaxAgeGroup();";
+    $myQuery2 = "CALL AgeGroups();";
+
+    $stmt1 = $conn->prepare($myQuery1); 
+    $stmt1->execute();
+    $result1 = $stmt1->get_result();
+    while ($row = $result1->fetch_assoc()) {
+        echo "<h1> Max Number of Viewers: ".$row['numUsers']."</h1>";
+        echo "<h1> Max Age Group: ".$row['age']."</h1>";
+    }
+
+    $stmt2 = $conn->prepare($myQuery2); 
+    $stmt2->execute();
+    $result2 = $stmt2->get_result();
+    while ($row2 = $result2->fetch_assoc()) {
+        array_push($dataPoints, array( "label"=> $row2["age"], "y"=> $row2["numPeople"]));
     }
     
 //End Query Code
@@ -25,14 +35,14 @@ include '../php/open.php';
 <script>
         window.onload = function () { 
             var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: false,
+                animationEnabled: true,
                 exportEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
                     text: "Number of Shows Most Highly Reviewed In Each Review Category"
                 },
                 data: [{
-                    type: "column", //change type to column, bar, line, area, pie, etc  
+                    type: "line", //change type to column, bar, line, area, pie, etc  
                     dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
                 }]
             });
