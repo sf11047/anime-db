@@ -6,7 +6,7 @@
                 exportEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
-                    text: "Popular Show Sources"
+                    text: "Most Popular Anime Sources"
                 },
                 data: [{
                     type: "column", //change type to column, bar, line, area, pie, etc  
