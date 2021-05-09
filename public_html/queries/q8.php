@@ -26,6 +26,7 @@ include '../php/open.php';
     $stmt2->execute();
     $result2 = $stmt2->get_result();
     while ($row2 = $result2->fetch_assoc()) {
+        echo row2['age'];
         array_push($dataPoints, array( "label"=> $row2["age"], "y"=> $row2["numPeople"]));
     }
     
