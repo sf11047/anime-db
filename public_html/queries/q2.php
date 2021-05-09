@@ -1,6 +1,6 @@
 <?php
 
-include "../php/q2visual.php"; //HTML Template
+include "../php/query-template.php"; //HTML Template
 
 include '../php/open.php';
 
@@ -25,5 +25,5 @@ include '../php/open.php';
 
 $conn->close();
 
-include "../php/query-template-end.php"; //HTML Template
+include "../php/q2visual.php"; //HTML Template
 ?>
