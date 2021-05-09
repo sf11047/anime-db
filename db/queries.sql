@@ -52,7 +52,7 @@ WITH UserCounts AS (
 SELECT MaxStatusCount.status, UserCounts.usersWithStatus AS usersWithStatus, AllMedia.titleJPN, AllMedia.synopsis, AllMedia.rank, AllMedia.source, AllMedia.startDate 
 FROM MaxStatusCount JOIN UserCounts ON MaxStatusCount.status = UserCounts.status AND MaxStatusCount.maxUserCount = UserCounts.usersWithStatus
 JOIN AllMedia ON UserCounts.mediaID = AllMedia.mediaID
-WHERE MaxStatusCount.status != "0" AND MaxStatusCount.status = "watching";
+WHERE MaxStatusCount.status != "0";
 
 -- 5. Do the most popular shows score the highest in the same review categories?
 -- Again, most popular is subjective so we will count this as shows ranked 1000 or less
