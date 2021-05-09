@@ -8,7 +8,7 @@ include '../php/open.php';
     echo "<h1>What shows have the best animation? Best story? Best characters?<h1>"; //First line should be the question
 
     $rating = $_POST['q15-rating'];
-    $all = "ALL'";
+    $all = "All'";
 
 
     $myQuery = "Call PopByGenre(?);";
