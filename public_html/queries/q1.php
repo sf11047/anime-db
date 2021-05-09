@@ -11,7 +11,9 @@ include '../php/open.php';
     
 
     $genreSelection = $_POST['genre'];
-    echo "<h1> Genre: ".$genreSelection."<h1>";
+    if ($genreSelection != "All") {
+        echo "<h1> Genre: ".$genreSelection."<h1>";
+    }
 
     $myQuery = "Call PopByGenre(?);";
     $stmt = $conn->prepare($myQuery); 
@@ -19,6 +21,9 @@ include '../php/open.php';
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
+        if ($genreSelection == "All") {
+            echo "<h1> Genre: ".$row['genreName']."<h1>";
+        }
         echo "<h2>".$row['titleJPN']."</h2>";
         echo "<h3> Rank: ".$row['rank']."</h3>";
         echo "<h3> Start Date: ".$row['startDate']."</h3>";
