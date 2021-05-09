@@ -27,7 +27,7 @@ include '../php/open.php';
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: false,
                 exportEnabled: true,
-                theme: "dark1", // "light1", "light2", "dark1", "dark2"
+                theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
                     text: "Number of Shows Most Highly Reviewed In Each Review Category"
                 },
