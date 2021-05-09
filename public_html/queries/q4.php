@@ -6,23 +6,22 @@ include '../php/open.php';
 
 //Begin Query Code
 
-    $query = "Most Popular Anime by Genre";
+    $query = "Most Marked Shows by Status";
     echo "<h1>".$query."<h1>";
-    
 
-    $genreSelection = $_POST['genre'];
-    if ($genreSelection != "All") {
-        echo "<h1> Genre: ".$genreSelection."<h1>";
+    $stat = $_POST['status'];
+    if ($stat != "All") {
+        echo "<h1> Status: ".$stat."<h1>";
     }
 
-    $myQuery = "Call PopByGenre(?);";
+    $myQuery = "Call PopularByStatus(?);";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $genreSelection);
+    $stmt->bind_param("s", $stat);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         if ($genreSelection == "All") {
-            echo "<h1> Genre: ".$row['genreName']."<h1>";
+            echo "<h1> Status: ".$row['status']." Users with Status: ".$row['usersWithStatus']."<h1>";
         }
         echo "<h2>".$row['titleJPN']."</h2>";
         echo "<h3> Rank: ".$row['rank']."</h3>";
