@@ -20,7 +20,7 @@ include '../php/open.php';
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        if ($genreSelection == "All") {
+        if ($stat == "All") {
             echo "<h1> Status: ".$row['status']." Users with Status: ".$row['usersWithStatus']."<h1>";
         }
         echo "<h2>".$row['titleJPN']."</h2>";
