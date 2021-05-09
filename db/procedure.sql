@@ -135,18 +135,18 @@ WITH maxEpisodes AS (
         SELECT MAX(TV.numEpisodes) AS epCount
         FROM TV
 )
-SELECT TV.titleJPN, TV.numEpisodes, TV.synopsis
+SELECT TV.titleJPN, TV.numEpisodes, TV.synopsis, TV.rank, TV.startDate, TV.source
 FROM maxEpisodes JOIN TV ON maxEpisodes.epCount = TV.numEpisodes;
     ELSEIF runtype = "time" THEN
 WITH RunTime AS (
-        SELECT TIMESTAMPDIFF(day, TV.startDate, TV.endDate) AS daysRun, TV.titleJPN, TV.synopsis
+        SELECT TIMESTAMPDIFF(day, TV.startDate, TV.endDate) AS daysRun, TV.titleJPN, TV.synopsis, TV.source, TV.rank, TV.startDate
         FROM TV 
         WHERE TV.startDate IS NOT NULL AND TV.endDate IS NOT NULL
 ), MaxRunTime AS (
         SELECT MAX(RunTime.daysRun) AS runTime
         FROM RunTime
 )
-SELECT RunTime.daysRun, RunTime.titleJPN, RunTime.synopsis
+SELECT RunTime.daysRun, RunTime.titleJPN, RunTime.synopsis, RunTime.source, RunTime.startDate, RunTime.rank
 FROM MaxRunTime JOIN RunTime ON RunTime.daysRun = MaxRunTime.runTime;
     END IF;
 END; //
