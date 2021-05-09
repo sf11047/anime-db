@@ -28,7 +28,7 @@ include '../php/open.php';
         echo "<h3> Rank: ".$row['rank']."</h3>";
         echo "<h3> Start Date: ".$row['startDate']."</h3>";
         echo "<h3> Source: ".$row['source']."</h3>";
-        echo "<p> Rank: ".$row['synopsis']."</p>";
+        echo "<p>".$row['synopsis']."</p>";
     }
     
 //End Query Code
