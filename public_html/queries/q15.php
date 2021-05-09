@@ -16,7 +16,7 @@ include '../php/open.php';
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         echo "<h2> Show: ".$row['titleJPN']."</h2>";
-        echo "<h2> Rating:".$row['avgRating']."/10</h2>";
+        echo "<p> Rating:".$row['avgRating']."/10</p>";
     }
 
 //End Query PHP Code
