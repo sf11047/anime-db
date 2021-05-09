@@ -12,20 +12,16 @@ include '../php/open.php';
     $genreSelection = $_POST['genre'];
     echo "genre: ".$genreSelection." <br> </br>";
 
-    $myQuery = "Call PopByGenre();";
+    $myQuery = "Call PopByGenre(?);";
     $stmt = $conn->prepare($myQuery); 
-    if (!stmt) {
-        echo "error occured preparing statement";
-    }
+    $stmt->bind_param("s", $genreSelection);
     echo $myQuery;
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        echo $row['titleJPN'];
-        echo "looping";
+        echo "genre: ".$row['genreName']." "$row['titleJPN']."<br></br>";
     }
-    echo "Finished";
-
+    
 //End Query Code
 
 $conn->close();
