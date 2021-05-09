@@ -18,6 +18,7 @@ include '../php/open.php';
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         echo $row['titleJPN'];
+        echo "looping";
     }
     echo "Finished";
 
