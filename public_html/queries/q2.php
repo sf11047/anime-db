@@ -38,7 +38,7 @@ window.onload = function () {
     });
     chart.render(); 
 }
-</script>"
+</script>";
 
 $conn->close();
 
