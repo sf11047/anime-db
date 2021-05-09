@@ -10,16 +10,21 @@ include '../php/open.php';
     $rating = $_POST['q15-rating'];
     $all = "ALL'";
 
+
     $myQuery = "Call PopByGenre(?);";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $all);
+    $stmt->bind_param("s", $$all);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        echo "Looping";
+        if ($genreSelection == "All") {
+            echo "<h1> Genre: ".$row['genreName']."<h1>";
+        }
         echo "<h2>".$row['titleJPN']."</h2>";
-        echo "<h2>".$row['avgRating']."</h2>";
-        echo "<h2>".$row['mediaID']."</h2>";
+        echo "<h3> Rank: ".$row['rank']."</h3>";
+        echo "<h3> Start Date: ".$row['startDate']."</h3>";
+        echo "<h3> Source: ".$row['source']."</h3>";
+        echo "<p>".$row['synopsis']."</p>";
     }
 
 //End Query PHP Code
