@@ -12,6 +12,7 @@ include '../php/open.php';
     $myQuery = "Call TopCategoryRating(?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->bind_param("s", $rating);
+    echo "Var: ".$rating." is right?";
     $stmt->execute();
     $result = $stmt->get_result();
     echo $result;
