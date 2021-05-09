@@ -20,4 +20,6 @@ SELECT * FROM Movie;
 
 ```
 
-Which shows are being rewatched the most? (Has internal server error because of time? works on dbvis)
+Q 14 and 12 (Has internal server error because of time? works on dbvis).
+Note sure if the db is set up wrong or the query takes too long? 
+Both use SetStatus.
