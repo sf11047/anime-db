@@ -12,10 +12,8 @@ include '../php/open.php';
     $genreSelection = $_POST['genre'];
     echo "genre: ".$genreSelection." <br> </br>";
 
-    $myQuery = "Call PopByGenre(?);";
+    $myQuery = "Call PopByGenre('All');";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $genreSelection);
-    echo $myQuery;
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
