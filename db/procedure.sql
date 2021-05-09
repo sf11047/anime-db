@@ -153,3 +153,55 @@ END; //
 
 DELIMITER ;
 
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS MostAnimeMade //
+
+CREATE PROCEDURE MostAnimeMade(IN runtype VARCHAR(30))
+BEGIN
+    IF runtype = "Episode" THEN
+WITH StudioEpisodeCount AS (
+        WITH TotalEpisodeCount AS (
+                SELECT Animates.studioName, SUM(TV.numEpisodes) as epsMade
+                FROM TV JOIN Animates ON TV.mediaID = Animates.mediaID
+                WHERE TV.numEpisodes > 0
+                GROUP BY Animates.studioName
+                UNION
+                SELECT Animates.studioName, COUNT(*) AS epsMade
+                FROM Movie JOIN Animates ON Movie.mediaID = Animates.mediaID
+                GROUP BY Animates.studioName
+                UNION
+                SELECT Animates.studioName, COUNT(*) AS epsMade
+                FROM OVA JOIN Animates ON OVA.mediaID = Animates.mediaID
+                GROUP BY Animates.studioName
+        )
+        SELECT TotalEpisodeCount.studioName, SUM(epsMade) AS totalEpisodes
+        FROM TotalEpisodeCount
+        GROUP BY TotalEpisodeCount.studioName
+), MaxEpisodeCount AS (
+        SELECT MAX(totalEpisodes) as maxEps
+        FROM StudioEpisodeCount
+)
+SELECT StudioEpisodeCount.studioName, StudioEpisodeCount.totalEpisodes 
+FROM MaxEpisodeCount JOIN StudioEpisodeCount ON MaxEpisodeCount.maxEps = StudioEpisodeCount.totalEpisodes;
+
+    ELSEIF runtype = "Show" THEN
+WITH ShowCount AS (
+        SELECT Animates.studioName, COUNT(*) AS shows 
+        FROM AllMedia JOIN Animates ON AllMedia.mediaID = Animates.mediaID
+        GROUP BY Animates.studioName
+), 
+MaxShowCount AS (
+        SELECT MAX(ShowCount.shows) AS showsMade
+        FROM ShowCount
+)
+SELECT ShowCount.studioName, MaxShowCount.showsMade
+FROM MaxShowCount JOIN ShowCount ON MaxShowCount.showsMade = ShowCount.shows;
+
+    END IF;
+END; //
+
+DELIMITER ;
+
+

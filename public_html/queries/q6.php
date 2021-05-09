@@ -20,11 +20,11 @@ include '../php/open.php';
     while ($row = $result->fetch_assoc()) {
 
         if ($runType == "Episode") {
-            echo "<h1> Number of Episodes:".$row['numEpisodes']."<h1>";
+            echo "<h1> Number of Episodes: ".$row['numEpisodes']."<h1>";
         }
         
         if ($runType == "Time") {
-            echo "<h1> Days Run:".$row['daysRun']."<h1>";
+            echo "<h1> Days Run: ".$row['daysRun']."<h1>";
         }
 
         echo "<h2>".$row['titleJPN']."</h2>";
