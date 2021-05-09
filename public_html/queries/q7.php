@@ -19,19 +19,15 @@ include '../php/open.php';
 
     while ($row = $result->fetch_assoc()) {
 
+        echo "<h1>".$row["studioName"]."</h1>";
+
         if ($runType == "Episode") {
-            echo "<h1> Number of Episodes: ".$row['numEpisodes']."<h1>";
+            echo "<h1> Number of Episodes: ".$row['totalEpisodes']."<h1>";
         }
         
-        if ($runType == "Time") {
-            echo "<h1> Days Run: ".$row['daysRun']."<h1>";
+        if ($runType == "Show") {
+            echo "<h1> Number of Shows: ".$row['showsMade']."<h1>";
         }
-
-        echo "<h2>".$row['titleJPN']."</h2>";
-        echo "<h3> Rank: ".$row['rank']."</h3>";
-        echo "<h3> Start Date: ".$row['startDate']."</h3>";
-        echo "<h3> Source: ".$row['source']."</h3>";
-        echo "<p>".$row['synopsis']."</p>";
     }
 
 //End Query Code
