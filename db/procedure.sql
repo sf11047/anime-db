@@ -130,14 +130,14 @@ DROP PROCEDURE IF EXISTS LongestRunning //
 
 CREATE PROCEDURE LongestRunning(IN runtype VARCHAR(30))
 BEGIN
-    IF runtype = "episode" THEN
+    IF runtype = "Episode" THEN
 WITH maxEpisodes AS (
         SELECT MAX(TV.numEpisodes) AS epCount
         FROM TV
 )
 SELECT TV.titleJPN, TV.numEpisodes, TV.synopsis, TV.rank, TV.startDate, TV.source
 FROM maxEpisodes JOIN TV ON maxEpisodes.epCount = TV.numEpisodes;
-    ELSEIF runtype = "time" THEN
+    ELSEIF runtype = "Time" THEN
 WITH RunTime AS (
         SELECT TIMESTAMPDIFF(day, TV.startDate, TV.endDate) AS daysRun, TV.titleJPN, TV.synopsis, TV.source, TV.rank, TV.startDate
         FROM TV 

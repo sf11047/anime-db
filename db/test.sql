@@ -1,6 +1,12 @@
 -- Team Members: Samantha Fu (sfu12) & Anthony Das (adas22)
 SHOW PROCEDURE STATUS;
 
+CALL LongestRunning("episode");
+
+CALL LongestRunning("time");
+
+CALL HighestReviewCategory();
+
 CALL PopularByStatus("completed");
 
 CALL PopularStudios();
