@@ -8,14 +8,13 @@ include '../php/open.php';
     echo "<h1>What shows have the best animation? Best story? Best characters?<h1>"; //First line should be the question
 
     $rating = $_POST['q15-rating'];
+    $all = "all'"
 
-    $myQuery = "Call TopCategoryRating(?);";
+    $myQuery = "Call PopByGenre(?);";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $rating);
-    echo "Var: ".$rating." is right?";
+    $stmt->bind_param("s", $all);
     $stmt->execute();
     $result = $stmt->get_result();
-    echo $result;
     while ($row = $result->fetch_assoc()) {
         echo "Looping";
         echo "<h2>".$row['titleJPN']."</h2>";
