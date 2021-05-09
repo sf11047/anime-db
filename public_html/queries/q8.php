@@ -22,6 +22,8 @@ include '../php/open.php';
         echo "<h1> Max Age Group: ".$row['age']."</h1>";
     }
 
+    echo $myQuery2;
+    
     $stmt2 = $conn->prepare($myQuery2); 
     $stmt2->execute();
     $result2 = $stmt2->get_result();
