@@ -205,3 +205,55 @@ END; //
 DELIMITER ;
 
 
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS MaxAgeGroup //
+
+CREATE PROCEDURE MaxAgeGroup()
+BEGIN
+WITH Ages AS (
+        SELECT TIMESTAMPDIFF(year, Users.birthDate, NOW()) AS age, Users.userName
+        FROM Users
+        WHERE Users.birthDate IS NOT NULL
+), AgeCount AS (
+        SELECT Ages.age, COUNT(*) AS numPeople
+        FROM Ages
+        GROUP BY Ages.age
+), maxNumPeople AS (
+        SELECT MAX(AgeCount.numPeople) AS maxNum
+        FROM AgeCount
+)
+SELECT AgeCount.age, AgeCount.numPeople AS numUsers
+FROM AgeCount JOIN maxNumPeople ON AgeCount.numPeople = maxNumPeople.maxNum;
+
+END; //
+
+DELIMITER ;
+
+
+
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS AgeGroups //
+
+CREATE PROCEDURE AgeGroups()
+BEGIN
+WITH Ages AS (
+        SELECT TIMESTAMPDIFF(year, Users.birthDate, NOW()) AS age, Users.userName
+        FROM Users
+        WHERE Users.birthDate IS NOT NULL
+)
+SELECT Ages.age, COUNT(*) AS numPeople
+FROM Ages
+GROUP BY Ages.age
+ORDER BY Ages.age ASC;
+
+END; //
+
+DELIMITER ;
+
+
+
+
+
+
