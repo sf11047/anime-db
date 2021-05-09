@@ -7,7 +7,7 @@ include '../php/open.php';
 
     echo "<h1>".$query."<h1>"; //First line should be the question
 
-    //echo '<div id="chartContainer" style="height: 500px; width: 50%;"></div>'; //Needed for canvasjs
+    echo '<div id="chartContainer" style="height: 500px; width: 50%;"></div>';
 
     //Rest of query
 
@@ -18,8 +18,7 @@ include '../php/open.php';
 <!-- Begin JS -->
 
 <script type="text/javascript">
-    //Canvasjs chart example code
-    /* window.onload = function () {
+    window.onload = function () {
           var chart = new CanvasJS.Chart("chartContainer", {
               data: [
               {
@@ -36,7 +35,7 @@ include '../php/open.php';
           });
  
           chart.render();
-      } */
+      }
 </script>
 
 <!-- End JS -->
