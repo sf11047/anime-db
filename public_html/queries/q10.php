@@ -13,16 +13,15 @@ include '../php/open.php';
 
     $dataPoints = array();
 
-    $opt = $_POST['q11'];
-
-    $myQuery = "CALL TopGenresPop(?);";
+    $myQuery = "CALL HighestReviewCategory();";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $opt);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> $row["count"]));
+        array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
     }
+
+    $conn->close();
     
 //End Query Code
 
@@ -44,10 +43,7 @@ include '../php/open.php';
             chart.render(); 
         }
     </script>
-    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <?php
-$conn->close();
 include "../php/query-template-end.php"; //HTML Template
 ?>
