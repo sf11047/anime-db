@@ -29,7 +29,7 @@ include '../php/open.php';
                 exportEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
-                    text: "Most Popular Anime Sources"
+                    text: "Number of Anime Viewers By Year"
                 },
                 data: [{
                     type: "line", //change type to column, bar, line, area, pie, etc  

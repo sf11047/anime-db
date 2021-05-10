@@ -3,6 +3,8 @@ SHOW PROCEDURE STATUS;
 
 CALL AgeGroups();
 
+CALL MaxAgeGroup();
+
 CALL MostAnimeMade("Episode");
 
 Call MostAnimeMade("Show");

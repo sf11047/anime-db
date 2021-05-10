@@ -25,9 +25,9 @@ DELIMITER ;
 
 DELIMITER //
 
-DROP PROCEDURE IF EXISTS PopularSource //
+DROP PROCEDURE IF EXISTS MangaVSOriginal //
 
-CREATE PROCEDURE PopularSource()
+CREATE PROCEDURE MangaVSOriginal()
 BEGIN
 SELECT AllMedia.source AS sourceType, COUNT(AllMedia.mediaID) AS numShows
 FROM AllMedia

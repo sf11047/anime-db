@@ -11,7 +11,7 @@ include '../php/open.php';
 
     $dataPoints = array();
 
-    $myQuery = "CALL PopularSource();";
+    $myQuery = "CALL MangaVSOriginal();";
     $stmt = $conn->prepare($myQuery); 
     $stmt->execute();
     $result = $stmt->get_result();
@@ -22,6 +22,7 @@ include '../php/open.php';
 //End Query Code
 
 ?>
+
 <script>
         window.onload = function () { 
             var chart = new CanvasJS.Chart("chartContainer", {
