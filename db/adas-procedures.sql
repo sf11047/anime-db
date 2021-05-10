@@ -131,7 +131,7 @@ ELSEIF opt = "max" THEN
                 GROUP BY username)
         SELECT max(watching) AS 'out'
         FROM Watching;
-ELSEIF opt= = "min" THEN
+ELSEIF opt = "min" THEN
         WITH Watching AS (
                 SELECT username, count(status) AS 'watching'
                 FROM SetStatus
