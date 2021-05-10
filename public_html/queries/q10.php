@@ -13,12 +13,15 @@ include '../php/open.php';
 
     $dataPoints = array();
 
-    $myQuery = "CALL HighestReviewCategory();";
+    $opt = $_POST['q11'];
+
+    $myQuery = "CALL TopGenresPop(?);";
     $stmt = $conn->prepare($myQuery); 
+    $stmt->bind_param("s", $opt);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
+        array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> $row["count"]));
     }
     
 //End Query Code
