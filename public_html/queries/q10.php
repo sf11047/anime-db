@@ -20,8 +20,6 @@ include '../php/open.php';
     while ($row = $result->fetch_assoc()) {
         array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
     }
-
-    $conn->close();
     
 //End Query Code
 
@@ -45,5 +43,6 @@ include '../php/open.php';
     </script>
 
 <?php
+$conn->close();
 include "../php/query-template-end.php"; //HTML Template
 ?>
