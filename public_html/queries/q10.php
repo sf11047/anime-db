@@ -11,6 +11,8 @@ include '../php/open.php';
         echo "<h1>What are the top 5 genres that have the most viewers?</h1>";
     }
 
+    echo '<div id="chartContainer" style="height: 400; width: 100%;"></div>'; //Needed for canvasjs
+
     $dataPoints = array();
 
     $myQuery = "CALL HighestReviewCategory();";
@@ -41,7 +43,6 @@ $conn->close();
             chart.render(); 
         }
     </script>
-    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
 <?php
 include "../php/query-template-end.php"; //HTML Template
 ?>
