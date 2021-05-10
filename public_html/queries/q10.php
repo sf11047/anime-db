@@ -1,12 +1,10 @@
 <?php
+
 include "../php/query-template.php"; //HTML Template
 
 include '../php/open.php';
 
-//Begin Query PHP Code
-
-    //Rest of query
-    $opt = $_POST['q10'];
+//Begin Query Code
 
     if ($opt == "shows") {
         echo "<h1>What are the top 5 genres that have the most shows?</h1>";
@@ -14,46 +12,32 @@ include '../php/open.php';
         echo "<h1>What are the top 5 genres that have the most viewers?</h1>";
     }
 
-    $myQuery = "CALL TopGenresPop(?);";
+    $stat = $_POST['q10'];
+    $stat = "All";
+    if ($stat != "All") {
+        echo "<h1> Status: ".$stat."<h1>";
+    }
+
+    $myQuery = "Call PopularByStatus(?);";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $opt);
+    $stmt->bind_param("s", $stat);
     $stmt->execute();
     $result = $stmt->get_result();
-
-    $dataPoints = array();
-
     while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> $row["count"]));
+        if ($stat == "All") {
+            echo "<h1> Status: ".$row['status']."</h1>"; 
+            echo "<h1> Users with Status: ".$row['usersWithStatus']."</h1>";
+        }
+        echo "<h2>".$row['titleJPN']."</h2>";
+        echo "<h3> Rank: ".$row['rank']."</h3>";
+        echo "<h3> Start Date: ".$row['startDate']."</h3>";
+        echo "<h3> Source: ".$row['source']."</h3>";
+        echo "<p>".$row['synopsis']."</p>";
     }
-?>
-<!-- Begin JS -->
+    
+//End Query Code
 
-<div id="chartContainer" style="height: 400; width: 100%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-<script>
-        window.onload = function () {
-          var chart = new CanvasJS.Chart("chartContainer", {
-              data: [
-              {
-                  type: "column",
-                  dataPoints: [
-                  { x: 10, y: 10 },
-                  { x: 20, y: 15 },
-                  { x: 30, y: 25 },
-                  { x: 40, y: 30 },
-                  { x: 50, y: 28 }
-                  ]
-              }
-              ]
-          });
- 
-          chart.render();
-      }
-</script>
-<!-- End JS -->
-
-<?php
 $conn->close();
+
 include "../php/query-template-end.php"; //HTML Template
 ?>
