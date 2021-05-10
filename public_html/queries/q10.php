@@ -42,8 +42,6 @@ include '../php/open.php';
         }
     </script>
     <div id="chartContainer" style="height: 400px; width: 100%;"></div>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
 <?php
 $conn->close();
 include "../php/query-template-end.php"; //HTML Template
