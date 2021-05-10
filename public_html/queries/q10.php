@@ -14,9 +14,6 @@ include '../php/open.php';
         echo "<h1>What are the top 5 genres that have the most viewers?</h1>";
     }
 
-    echo '<div id="chartContainer" style="height: 400; width: 100%;"></div>';
-    echo '<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>';
-
     $myQuery = "CALL TopGenresPop(?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->bind_param("s", $opt);
@@ -30,6 +27,10 @@ include '../php/open.php';
     }
 ?>
 <!-- Begin JS -->
+
+<div id="chartContainer" style="height: 400; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 <script>
         window.onload = function () {
           var chart = new CanvasJS.Chart("chartContainer", {
