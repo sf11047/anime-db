@@ -22,7 +22,7 @@ include '../php/open.php';
     }
     
 //End Query Code
-
+$conn->close();
 ?>
 <script>
         window.onload = function () { 
@@ -43,6 +43,5 @@ include '../php/open.php';
     </script>
     <div id="chartContainer" style="height: 400px; width: 100%;"></div>
 <?php
-$conn->close();
 include "../php/query-template-end.php"; //HTML Template
 ?>
