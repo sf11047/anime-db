@@ -15,12 +15,12 @@ include '../php/open.php';
 
     $dataPoints = array();
 
-    $myQuery = "CALL HighestReviewCategory();";
+    $myQuery = "CALL TopGenresPop(?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
+        array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> $row["count"]));
     }
     
 //End Query Code
@@ -42,7 +42,7 @@ $conn->close();
             });
             chart.render(); 
         }
-    </script>
+</script>
 <?php
 include "../php/query-template-end.php"; //HTML Template
 ?>
