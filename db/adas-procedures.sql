@@ -146,7 +146,7 @@ DROP PROCEDURE IF EXISTS TopGenresPop //
 
 CREATE PROCEDURE TopGenresPop(IN opt VARCHAR(10))
 BEGIN
-IF opt = "show" THEN
+IF opt = "shows" THEN
         WITH GenreCount AS (
                 SELECT genreName, count(mediaID) AS 'count'
                 FROM BelongsTo
