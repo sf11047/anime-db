@@ -25,11 +25,8 @@ include '../php/open.php';
     while ($row = $result->fetch_assoc()) {
         array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> $row["count"]));
     }
-
-//End Query PHP Code
-    $conn->close();
 ?>
-
+<div id="chartContainer" style="height: 400; width: 100%;"></div>
 <!-- Begin JS -->
 
 <script>
@@ -68,10 +65,9 @@ include '../php/open.php';
           chart.render();
       }
 </script>
-
-<div id="chartContainer" style="height: 400; width: 100%;"></div>
 <!-- End JS -->
 
 <?php
+$conn->close();
 include "../php/query-template-end.php"; //HTML Template
 ?>
