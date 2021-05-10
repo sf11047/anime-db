@@ -15,13 +15,16 @@ include '../php/open.php';
 
     $dataPoints = array();
 
+    $opt = $_POST['q10'];
+
     $myQuery = "CALL TopGenresPop(?);";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", "viewers");
+    $stmt->bind_param("s", $opt);
+    echo $opt;
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> $row["count"]));
+        array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> 0));
     }
     
 //End Query Code
