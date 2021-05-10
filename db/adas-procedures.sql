@@ -111,4 +111,35 @@ ELSEIF opt = "completed" THEN
 END IF;
 END;//
 
+DROP PROCEDURE IF EXISTS MultiShows //
+
+CREATE PROCEDURE MultiShows(IN opt VARCHAR(10))
+BEGIN
+IF opt = "avg" THEN
+WITH Watching AS (
+        SELECT username, count(status) AS 'watching'
+        FROM SetStatus
+        WHERE status LIKE "watching"
+        GROUP BY username)
+SELECT avg(watching) AS 'out'
+FROM Watching;
+ELSEIF opt = "max" THEN
+WITH Watching AS (
+        SELECT username, count(status) AS 'watching'
+        FROM SetStatus
+        WHERE status LIKE "watching"
+        GROUP BY username)
+SELECT max(watching) AS 'out'
+FROM Watching;
+ELSEIF opt= = "min" THEN
+WITH Watching AS (
+        SELECT username, count(status) AS 'watching'
+        FROM SetStatus
+        WHERE status LIKE "watching"
+        GROUP BY username)
+SELECT min(watching) AS 'out'
+FROM Watching;
+END IF;
+END;//
+
 DELIMITER ;
