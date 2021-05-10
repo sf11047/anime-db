@@ -20,11 +20,11 @@ include '../php/open.php';
     $myQuery = "CALL TopGenresPop(?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->bind_param("s", $opt);
-    echo $opt;
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> 0));
+        echo "<p>Label: ".$row["genreName"]." Data: ".$row["count"]."</p>";
     }
     
 //End Query Code
