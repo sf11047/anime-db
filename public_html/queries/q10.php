@@ -30,22 +30,6 @@ include '../php/open.php';
 <!-- Begin JS -->
 
 <script>
-       /* window.onload = function () { 
-            var chart = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: false,
-                exportEnabled: true,
-                theme: "light1", // "light1", "light2", "dark1", "dark2"
-                title:{
-                    text: "Top 5 Genres"
-                },
-                data: [{
-                    type: "column", //change type to column, bar, line, area, pie, etc  
-                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-                }]
-            });
-            chart.render(); 
-        } */
-
         window.onload = function () {
           var chart = new CanvasJS.Chart("chartContainer", {
               data: [
