@@ -35,7 +35,7 @@ include '../php/open.php';
 <!-- Begin JS -->
 
 <script type="text/javascript">
-        window.onload = function () { 
+       /* window.onload = function () { 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: false,
                 exportEnabled: true,
@@ -49,7 +49,26 @@ include '../php/open.php';
                 }]
             });
             chart.render(); 
-        }
+        } */
+
+        window.onload = function () {
+          var chart = new CanvasJS.Chart("chartContainer", {
+              data: [
+              {
+                  type: "column",
+                  dataPoints: [
+                  { x: 10, y: 10 },
+                  { x: 20, y: 15 },
+                  { x: 30, y: 25 },
+                  { x: 40, y: 30 },
+                  { x: 50, y: 28 }
+                  ]
+              }
+              ]
+          });
+ 
+          chart.render();
+      }
 </script>
 
 <!-- End JS -->
