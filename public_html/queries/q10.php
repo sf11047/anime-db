@@ -24,7 +24,6 @@ include '../php/open.php';
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
         array_push($dataPoints, array( "label"=> $row["genreName"], "y"=> $row["count"]));
-       // echo "<p>Label: ".$row["genreName"]." Data: ".$row["count"]."</p>";
     }
     
 //End Query Code
@@ -37,7 +36,13 @@ $conn->close();
                 exportEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
-                    text: "Number of Shows Most Highly Reviewed In Each Review Category"
+                    text: 
+                        <?php     
+                            if ($opt == "shows") {
+                                echo "<h1>What are the top 5 genres that have the most shows?</h1>";
+                            } else {
+                                echo "<h1>What are the top 5 genres that have the most viewers?</h1>";
+                        } ?>
                 },
                 data: [{
                     type: "column", //change type to column, bar, line, area, pie, etc  
