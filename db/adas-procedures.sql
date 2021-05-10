@@ -176,4 +176,15 @@ ELSEIF opt = "viewers" THEN
 END IF;
 END;//
 
+DROP PROCEDURE IF EXISTS NewShowsYear //
+
+CREATE PROCEDURE NewShowsYear()
+BEGIN
+        SELECT year(startDate) AS 'year', count(year(startDate)) AS 'count'
+        FROM AllMedia
+        WHERE startDate IS NOT NULL
+        GROUP BY year(startDate)
+        ORDER BY year DESC;
+END;//
+
 DELIMITER ;
