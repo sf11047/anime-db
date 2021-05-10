@@ -5,39 +5,46 @@ include "../php/query-template.php"; //HTML Template
 include '../php/open.php';
 
 //Begin Query Code
-
     if ($opt == "shows") {
         echo "<h1>What are the top 5 genres that have the most shows?</h1>";
     } else {
         echo "<h1>What are the top 5 genres that have the most viewers?</h1>";
     }
 
-    $stat = $_POST['q10'];
-    $stat = "All";
-    if ($stat != "All") {
-        echo "<h1> Status: ".$stat."<h1>";
-    }
+    $dataPoints = array();
 
-    $myQuery = "Call PopularByStatus(?);";
+    $myQuery = "CALL HighestReviewCategory();";
     $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("s", $stat);
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        if ($stat == "All") {
-            echo "<h1> Status: ".$row['status']."</h1>"; 
-            echo "<h1> Users with Status: ".$row['usersWithStatus']."</h1>";
-        }
-        echo "<h2>".$row['titleJPN']."</h2>";
-        echo "<h3> Rank: ".$row['rank']."</h3>";
-        echo "<h3> Start Date: ".$row['startDate']."</h3>";
-        echo "<h3> Source: ".$row['source']."</h3>";
-        echo "<p>".$row['synopsis']."</p>";
+        array_push($dataPoints, array( "label"=> $row["category"], "y"=> $row["numShows"]));
     }
     
 //End Query Code
 
-$conn->close();
+?>
+<script>
+        window.onload = function () { 
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: false,
+                exportEnabled: true,
+                theme: "light1", // "light1", "light2", "dark1", "dark2"
+                title:{
+                    text: "Number of Shows Most Highly Reviewed In Each Review Category"
+                },
+                data: [{
+                    type: "column", //change type to column, bar, line, area, pie, etc  
+                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+            chart.render(); 
+        }
+    </script>
+    <div id="chartContainer" style="height: 400px; width: 100%;"></div>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
+<?php
+$conn->close();
 include "../php/query-template-end.php"; //HTML Template
 ?>
