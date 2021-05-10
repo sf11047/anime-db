@@ -36,14 +36,7 @@ $conn->close();
                 exportEnabled: true,
                 theme: "light1", // "light1", "light2", "dark1", "dark2"
                 title:{
-                    text:                         
-                        <?php     
-                            if ($opt == "shows") {
-                                echo "Top 5 genres that have the most shows";
-                            } else {
-                                echo "Top 5 genres that have the most viewers";
-                            } 
-                        ?>
+                    text: "Top 5 genres" //TODO Change title based on input
                 },
                 data: [{
                     type: "column", //change type to column, bar, line, area, pie, etc  
