@@ -17,6 +17,7 @@ include '../php/open.php';
 
     $myQuery = "CALL TopGenresPop(?);";
     $stmt = $conn->prepare($myQuery); 
+    $stmt->bind_param("s", "viewers");
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
