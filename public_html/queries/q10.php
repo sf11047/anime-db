@@ -9,9 +9,9 @@ include '../php/open.php';
     $opt = $_POST['q10'];
 
     if ($opt == "shows") {
-        echo "<h1>What are the top 5 genres that have the most shows?<h1>";
+        echo "<h1>What are the top 5 genres that have the most shows?</h1>";
     } else {
-        echo "<h1>What are the top 5 genres that have the most viewers?<h1>";
+        echo "<h1>What are the top 5 genres that have the most viewers?</h1>";
     }
 
     echo '<div id="chartContainer" style="height: 500px; width: 50%;"></div>'; //Needed for canvasjs
