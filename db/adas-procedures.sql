@@ -116,29 +116,63 @@ DROP PROCEDURE IF EXISTS MultiShows //
 CREATE PROCEDURE MultiShows(IN opt VARCHAR(10))
 BEGIN
 IF opt = "avg" THEN
-WITH Watching AS (
-        SELECT username, count(status) AS 'watching'
-        FROM SetStatus
-        WHERE status LIKE "watching"
-        GROUP BY username)
-SELECT avg(watching) AS 'out'
-FROM Watching;
+        WITH Watching AS (
+                SELECT username, count(status) AS 'watching'
+                FROM SetStatus
+                WHERE status LIKE "watching"
+                GROUP BY username)
+        SELECT avg(watching) AS 'out'
+        FROM Watching;
 ELSEIF opt = "max" THEN
-WITH Watching AS (
-        SELECT username, count(status) AS 'watching'
-        FROM SetStatus
-        WHERE status LIKE "watching"
-        GROUP BY username)
-SELECT max(watching) AS 'out'
-FROM Watching;
+        WITH Watching AS (
+                SELECT username, count(status) AS 'watching'
+                FROM SetStatus
+                WHERE status LIKE "watching"
+                GROUP BY username)
+        SELECT max(watching) AS 'out'
+        FROM Watching;
 ELSEIF opt= = "min" THEN
-WITH Watching AS (
-        SELECT username, count(status) AS 'watching'
-        FROM SetStatus
-        WHERE status LIKE "watching"
-        GROUP BY username)
-SELECT min(watching) AS 'out'
-FROM Watching;
+        WITH Watching AS (
+                SELECT username, count(status) AS 'watching'
+                FROM SetStatus
+                WHERE status LIKE "watching"
+                GROUP BY username)
+        SELECT min(watching) AS 'out'
+        FROM Watching;
+END IF;
+END;//
+
+DROP PROCEDURE IF EXISTS TopGenresPop //
+
+CREATE PROCEDURE TopGenresPop(IN opt VARCHAR(10))
+BEGIN
+IF opt = "show" THEN
+        WITH GenreCount AS (
+                SELECT genreName, count(mediaID) AS 'count'
+                FROM BelongsTo
+                GROUP BY genreName)
+        SELECT genreName, count AS 'count'
+        FROM GenreCount
+        ORDER BY count DESC
+        LIMIT 5;
+ELSEIF opt = "viewers" THEN
+        WITH ShowCount AS (
+                SELECT mediaID, count(username) AS 'countS'
+                FROM SetStatus
+                WHERE status LIKE "completed" OR status LIKE "watching" OR status LIKE "on hold"
+                GROUP BY mediaID
+        ),
+        GenreCount AS (
+                SELECT genreName, sum(countS) AS 'count'
+                FROM ShowCount
+                LEFT JOIN BelongsTo ON BelongsTo.mediaID = ShowCount.mediaID
+                GROUP BY genreName
+        )
+        SELECT genreName, count AS 'count'
+        FROM GenreCount
+        WHERE genreName IS NOT NULL
+        ORDER BY count DESC
+        LIMIT 5;
 END IF;
 END;//
 
