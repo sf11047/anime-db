@@ -7,7 +7,7 @@ include '../php/open.php';
 
     echo "<h1>".$query."<h1>"; //First line should be the question
 
-    //echo '<div id="chartContainer" style="height: 500px; width: 50%;"></div>'; //Needed for canvasjs
+    //echo '<div id="chartContainer" style="height: 400; width: 100%;"></div>'; //Needed for canvasjs
 
     //Rest of query
 

@@ -14,8 +14,6 @@ include '../php/open.php';
         echo "<h1>What are the top 5 genres that have the most viewers?</h1>";
     }
 
-    echo '<div id="chartContainer" style="height: 500px; width: 50%;"></div>'; //Needed for canvasjs
-
     $myQuery = "CALL TopGenresPop(?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->bind_param("s", $opt);
@@ -34,7 +32,7 @@ include '../php/open.php';
 
 <!-- Begin JS -->
 
-<script type="text/javascript">
+<script>
        /* window.onload = function () { 
             var chart = new CanvasJS.Chart("chartContainer", {
                 animationEnabled: false,
@@ -71,6 +69,7 @@ include '../php/open.php';
       }
 </script>
 
+<div id="chartContainer" style="height: 400; width: 100%;"></div>
 <!-- End JS -->
 
 <?php
