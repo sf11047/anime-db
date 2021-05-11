@@ -1,0 +1,11 @@
+The last two tables use quite large datasets and may take a little while to populate. 
+All database set is located in the db folder.
+
+Please use this link to access the full set of data:
+
+Once the you have the datasets:
+
+1. Run setup.sql or setup-small.sql
+2. Run procedure.sql
+
+The database is now ready to be used. Enjoy!
