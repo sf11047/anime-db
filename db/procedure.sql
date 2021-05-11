@@ -253,7 +253,194 @@ END; //
 
 DELIMITER ;
 
+DELIMITER //
 
+DROP PROCEDURE IF EXISTS TopCategoryRating //
+
+CREATE PROCEDURE TopCategoryRating(IN category VARCHAR(10))
+BEGIN
+IF category = "story" THEN
+    WITH MediaRating AS (
+            SELECT AllMedia.mediaID AS 'mediaID', AllMedia.titleJPN AS 'titleJPN', AVG(storyRating) AS 'story'
+            FROM Reviews
+            LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
+            GROUP BY mediaID
+    )
+    SELECT titleJPN, story AS 'avgRating'
+    FROM MediaRating
+    ORDER BY story DESC
+    LIMIT 20;
+ELSEIF category = "animation" THEN
+    WITH MediaRating AS (
+            SELECT AllMedia.mediaID AS 'mediaID', AllMedia.titleJPN AS 'titleJPN', AVG(animationRating) AS 'animation'
+            FROM Reviews
+            LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
+            GROUP BY mediaID
+    )
+    SELECT titleJPN, animation AS 'avgRating'
+    FROM MediaRating
+    ORDER BY animation DESC
+    LIMIT 20;
+ELSEIF category = "character" THEN
+    WITH MediaRating AS (
+            SELECT AllMedia.mediaID AS 'mediaID', AllMedia.titleJPN AS 'titleJPN', AVG(characterRating) AS 'characterR'
+            FROM Reviews
+            LEFT JOIN AllMedia ON AllMedia.mediaID = Reviews.mediaID
+            GROUP BY mediaID
+    )  
+    SELECT titleJPN, characterR AS 'avgRating'
+    FROM MediaRating
+    ORDER BY characterR DESC
+    LIMIT 20;
+END IF;
+END; //
+
+DROP PROCEDURE IF EXISTS MostRewatched //
+
+CREATE PROCEDURE MostRewatched()
+BEGIN
+WITH Rewatched AS (
+        SELECT AllMedia.mediaID AS 'mediaID', titleJPN, count(rewatch) AS 'rewatchCount'
+        FROM SetStatus
+        LEFT JOIN AllMedia ON AllMedia.mediaID = SetStatus.mediaID
+        WHERE rewatch = 1
+        GROUP BY mediaID)
+SELECT mediaID, titleJPN, rewatchCount
+FROM Rewatched
+ORDER BY rewatchCount DESC
+LIMIT 20;
+END;//
+
+DROP PROCEDURE IF EXISTS PopularSource //
+
+CREATE PROCEDURE PopularSource()
+BEGIN
+WITH Sources AS (
+        SELECT source, count(source) AS 'sourceCount'
+        FROM AllMedia
+        WHERE source NOT LIKE "Unknown"
+        GROUP BY source)
+SELECT source, sourceCount
+FROM Sources
+WHERE sourceCount = (SELECT MAX(sourceCount) FROM Sources);
+END;//
+
+DROP PROCEDURE IF EXISTS PlanVSComplete //
+
+CREATE PROCEDURE PlanVSComplete(IN opt VARCHAR(10))
+BEGIN
+IF opt = "plan" THEN
+    WITH Completed AS (
+            SELECT username, count(status) AS 'cc'
+            FROM SetStatus
+            WHERE status LIKE "completed"
+            GROUP BY username
+            ),
+    Plan AS (
+            SELECT username, count(status) AS 'pc'
+            FROM SetStatus
+            WHERE status LIKE "plan to watch"
+            GROUP BY username)
+    SELECT count(Completed.username) AS 'count'
+    FROM Plan
+    LEFT JOIN Completed ON Completed.username = Plan.username
+    WHERE cc < pc OR cc IS NULL;
+ELSEIF opt = "completed" THEN
+    WITH Completed AS (
+            SELECT username, count(status) AS 'cc'
+            FROM SetStatus
+            WHERE status LIKE "completed"
+            GROUP BY username
+            ),
+    Plan AS (
+            SELECT username, count(status) AS 'pc'
+            FROM SetStatus
+            WHERE status LIKE "plan to watch"
+            GROUP BY username)
+    SELECT count(Completed.username) AS 'count'
+    FROM Completed
+    LEFT JOIN Plan ON Completed.username = Plan.username
+    WHERE cc > pc OR pc IS NULL;
+END IF;
+END;//
+
+DROP PROCEDURE IF EXISTS MultiShows //
+
+CREATE PROCEDURE MultiShows(IN opt VARCHAR(10))
+BEGIN
+IF opt = "avg" THEN
+        WITH Watching AS (
+                SELECT username, count(status) AS 'watching'
+                FROM SetStatus
+                WHERE status LIKE "watching"
+                GROUP BY username)
+        SELECT avg(watching) AS 'out'
+        FROM Watching;
+ELSEIF opt = "max" THEN
+        WITH Watching AS (
+                SELECT username, count(status) AS 'watching'
+                FROM SetStatus
+                WHERE status LIKE "watching"
+                GROUP BY username)
+        SELECT max(watching) AS 'out'
+        FROM Watching;
+ELSEIF opt = "min" THEN
+        WITH Watching AS (
+                SELECT username, count(status) AS 'watching'
+                FROM SetStatus
+                WHERE status LIKE "watching"
+                GROUP BY username)
+        SELECT min(watching) AS 'out'
+        FROM Watching;
+END IF;
+END;//
+
+DROP PROCEDURE IF EXISTS TopGenresPop //
+
+CREATE PROCEDURE TopGenresPop(IN opt VARCHAR(10))
+BEGIN
+IF opt = "shows" THEN
+        WITH GenreCount AS (
+                SELECT genreName, count(mediaID) AS 'count'
+                FROM BelongsTo
+                GROUP BY genreName)
+        SELECT genreName, count AS 'count'
+        FROM GenreCount
+        ORDER BY count DESC
+        LIMIT 5;
+ELSEIF opt = "viewers" THEN
+        WITH ShowCount AS (
+                SELECT mediaID, count(username) AS 'countS'
+                FROM SetStatus
+                WHERE status LIKE "completed" OR status LIKE "watching" OR status LIKE "on hold"
+                GROUP BY mediaID
+        ),
+        GenreCount AS (
+                SELECT genreName, sum(countS) AS 'count'
+                FROM ShowCount
+                LEFT JOIN BelongsTo ON BelongsTo.mediaID = ShowCount.mediaID
+                GROUP BY genreName
+        )
+        SELECT genreName, count AS 'count'
+        FROM GenreCount
+        WHERE genreName IS NOT NULL
+        ORDER BY count DESC
+        LIMIT 5;
+END IF;
+END;//
+
+DROP PROCEDURE IF EXISTS NewShowsYear //
+
+CREATE PROCEDURE NewShowsYear()
+BEGIN
+        SELECT year(startDate) AS 'year', count(year(startDate)) AS 'count'
+        FROM AllMedia
+        WHERE startDate IS NOT NULL
+        GROUP BY year(startDate)
+        ORDER BY year DESC;
+END;//
+
+DELIMITER ;
 
 
 
