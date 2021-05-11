@@ -440,6 +440,19 @@ BEGIN
         ORDER BY year DESC;
 END;//
 
+DROP PROCEDURE IF EXISTS DeleteUser //
+
+CREATE PROCEDURE DeleteUser(IN user VARCHAR(255), OUT res VARCHAR(20))
+IF EXISTS(SELECT * FROM Users WHERE username = user) THEN
+-- Delete
+        SET res = "User deleted";
+ELSE
+-- Error
+        SET res = "User does not exist"
+END IF;
+SELECT @res;
+END;//
+
 DELIMITER ;
 
 
