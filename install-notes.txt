@@ -1,3 +1,5 @@
+Team Members: Samantha Fu (sfu12) & Anthony Das (adas22)
+
 The last two tables use quite large datasets and may take a little while to populate. 
 All database setup files are located in the db folder.
 
