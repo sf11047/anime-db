@@ -464,6 +464,22 @@ ELSE
 END IF;
 END;//
 
+DROP PROCEDURE IF EXISTS CreateGenre //
+
+CREATE PROCEDURE CreateGenre(IN genre VARCHAR(255), IN descr VARCHAR(1000))
+BEGIN
+IF EXISTS(SELECT * FROM Genre WHERE genreName = genre) THEN
+-- Error
+        SELECT "Genre Already Exist" AS outMessage;
+ELSE
+-- Add Genre
+        INSERT INTO Genre(genreName, description)
+        VALUES (genre, descr);
+
+        SELECT CONCAT("Genre ", genre, " added!") AS outMessage;
+END IF;
+END;//
+
 DELIMITER ;
 
 
