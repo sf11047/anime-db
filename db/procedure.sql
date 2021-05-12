@@ -446,6 +446,18 @@ CREATE PROCEDURE DeleteUser(IN user VARCHAR(255))
 BEGIN
 IF EXISTS(SELECT * FROM Users WHERE username = user) THEN
 -- Delete
+        -- Delete Reviews
+        DELETE FROM Reviews
+        WHERE username LIKE user;
+
+        -- Delete Status
+        DELETE FROM SetStatus
+        WHERE username LIKE user;
+
+        -- Delete User
+        DELETE FROM Users
+        WHERE username LIKE user;
+
         SELECT "User deleted" AS outMessage;
 ELSE
 -- Error
