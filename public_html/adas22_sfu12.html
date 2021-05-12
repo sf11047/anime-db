@@ -22,15 +22,18 @@
         <h3>Insert:</h3>
         <div class="queries">
             <div class="query-card">
-                <p></p>
-                
-                <form></form>
+                <p>Add a new genre</p>
+                <form action="queries/create-genre.php" method="post">
+                    Genre Name: <input type="text" name="genre">
+                    Description: <input type="text" name="desc">
+                    <input type="submit">
+                </form>
             </div>
         </div>
         <h3>Delete:</h3>
         <div class="queries">
             <div class="query-card">
-                <p>Delete User Account and Data</p>
+                <p>Delete user account and data</p>
                 <form action="queries/delete-user.php" method="post">
                     Username: <input type="text" name="username">
                     <input type="submit">

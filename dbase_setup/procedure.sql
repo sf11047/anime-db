@@ -441,7 +441,7 @@ END;//
 
 DROP PROCEDURE IF EXISTS DeleteUser //
 
-CREATE PROCEDURE DeleteUser(IN user VARCHAR(255))
+CREATE PROCEDURE DeleteUser(IN user VARBINARY(255))
 BEGIN
 IF EXISTS(SELECT * FROM Users WHERE username = user) THEN
 -- Delete
@@ -461,6 +461,22 @@ IF EXISTS(SELECT * FROM Users WHERE username = user) THEN
 ELSE
 -- Error
         SELECT "User does not exist" AS outMessage;
+END IF;
+END;//
+
+DROP PROCEDURE IF EXISTS CreateGenre //
+
+CREATE PROCEDURE CreateGenre(IN genre VARCHAR(255), IN descr VARCHAR(1000))
+BEGIN
+IF EXISTS(SELECT * FROM Genre WHERE genreName = genre) THEN
+-- Error
+        SELECT "Genre Already Exist" AS outMessage;
+ELSE
+-- Add Genre
+        INSERT INTO Genre(genreName, description)
+        VALUES (genre, descr);
+
+        SELECT CONCAT("Genre ", genre, " added!") AS outMessage;
 END IF;
 END;//
 
