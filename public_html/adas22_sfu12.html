@@ -24,8 +24,8 @@
             <div class="query-card">
                 <p>Add a new genre</p>
                 <form action="queries/create-genre.php" method="post">
-                    Genre Name: <input type="text" name="genre">
-                    Description: <input type="text" name="desc">
+                    Genre Name: <input type="text" name="genre" required="true">
+                    Description: <input type="text" name="desc" required="true">
                     <input type="submit">
                 </form>
             </div>
@@ -35,7 +35,7 @@
             <div class="query-card">
                 <p>Delete user account and data</p>
                 <form action="queries/delete-user.php" method="post">
-                    Username: <input type="text" name="username">
+                    Username: <input type="text" name="username" required="true">
                     <input type="submit">
                 </form>
             </div>

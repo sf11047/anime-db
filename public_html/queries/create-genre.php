@@ -10,13 +10,21 @@ include '../php/open.php';
     $genre = $_POST['genre'];
     $desc = $_POST['desc'];
 
-    $myQuery = "Call CreateGenre(?,?);";
-    $stmt = $conn->prepare($myQuery); 
-    $stmt->bind_param("ss", $genre, $desc);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        echo "<h2>".$row['outMessage']."</h2>";
+    if (!preg_match('/^[a-zA-Z]+$/', $genre)) {
+        echo "<h2 style='color: red;'>Genre should not have spaces and only include A-z and a-z.";
+    }
+    elseif (!preg_match('/^[A-Za-z0-9\s]+$/', $desc)) {
+        echo "<h2 style='color: red;'>GDescription should only include alphanumerics and spaces.";
+    }
+    else {
+        $myQuery = "Call CreateGenre(?,?);";
+        $stmt = $conn->prepare($myQuery); 
+        $stmt->bind_param("ss", $genre, $desc);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            echo "<h2>".$row['outMessage']."</h2>";
+        }
     }
 
 //End Query PHP Code
