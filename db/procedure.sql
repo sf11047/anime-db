@@ -450,7 +450,6 @@ ELSE
 -- Error
         SELECT "User does not exist" AS outMessage;
 END IF;
-SELECT @res;
 END;//
 
 DELIMITER ;
