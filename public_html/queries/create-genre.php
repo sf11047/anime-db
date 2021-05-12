@@ -14,7 +14,7 @@ include '../php/open.php';
         echo "<h2 style='color: red;'>Genre should not have spaces and only include A-z and a-z.";
     }
     elseif (!preg_match('/^[A-Za-z0-9\s]+$/', $desc)) {
-        echo "<h2 style='color: red;'>GDescription should only include alphanumerics and spaces.";
+        echo "<h2 style='color: red;'>Description should only include alphanumerics and spaces.";
     }
     else {
         $myQuery = "Call CreateGenre(?,?);";

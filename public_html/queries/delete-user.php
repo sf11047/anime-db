@@ -9,7 +9,7 @@ include '../php/open.php';
 
     $username = $_POST['username'];
 
-    if (!preg_match('/^[a-zA-Z0-9-_]+$/', $genre)) {
+    if (!preg_match('/^[a-zA-Z0-9-_]+$/', $username)) {
         echo "<h2 style='color: red;'>Usernames should only have alphanumerics and underscores/dashes";
     } else {
         $myQuery = "Call DeleteUser(?);";
