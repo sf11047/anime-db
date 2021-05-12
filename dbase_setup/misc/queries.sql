@@ -248,6 +248,9 @@ FROM Rewatched JOIN AllMedia ON Rewatched.mediaID = AllMedia.mediaID
 ORDER BY rewatchCount DESC
 LIMIT 20;
 
+SHOW Procedure Status;
+Call MostRewatched();
+
 -- 13. How many people completed more shows than they plan to watch and vice versa?
 -- 13a. completed > plan to watch
 WITH Completed AS (

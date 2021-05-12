@@ -9,6 +9,15 @@ https://drive.google.com/drive/folders/1wgK4j1U7HfrxzVHmWJvwOfqSPCnXhd3i?usp=sha
 Once the you have the datasets:
 
 1. Run setup.sql or setup-small.sql
+You can do so by running
+mysql -h dbase.cs.jhu.edu -u username -D dbname -p < setup.sql
+or
+mysql -h dbase.cs.jhu.edu -u username -D dbname -p < setup-small.sql
+
+* Note that the file paths must be replaced with the path to the files on your specific machine in both setup.sql and setup-small.sql
+
 2. Run procedure.sql
+You can do so by running 
+mysql -h dbase.cs.jhu.edu -u username -D dbname -p < procedure.sql
 
 The database is now ready to be used by our site. Enjoy!
