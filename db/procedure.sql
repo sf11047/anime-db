@@ -443,6 +443,7 @@ END;//
 DROP PROCEDURE IF EXISTS DeleteUser //
 
 CREATE PROCEDURE DeleteUser(IN user VARCHAR(255))
+BEGIN
 IF EXISTS(SELECT * FROM Users WHERE username = user) THEN
 -- Delete
         SELECT "User deleted" AS outMessage;
