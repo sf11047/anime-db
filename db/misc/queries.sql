@@ -237,6 +237,17 @@ FROM Rewatched
 ORDER BY rewatchCount DESC
 LIMIT 20;
 
+
+WITH Rewatched AS (
+        SELECT SetStatus.mediaID AS 'mediaID', count(SetStatus.mediaID) AS 'rewatchCount'
+        FROM SetStatus
+        WHERE rewatch = 1 AND mediaID IS NOT NULL
+        GROUP BY SetStatus.mediaID)
+SELECT AllMedia.mediaID, AllMedia.titleJPN, Rewatched.rewatchCount
+FROM Rewatched JOIN AllMedia ON Rewatched.mediaID = AllMedia.mediaID
+ORDER BY rewatchCount DESC
+LIMIT 20;
+
 -- 13. How many people completed more shows than they plan to watch and vice versa?
 -- 13a. completed > plan to watch
 WITH Completed AS (
