@@ -300,13 +300,12 @@ DROP PROCEDURE IF EXISTS MostRewatched //
 CREATE PROCEDURE MostRewatched()
 BEGIN
 WITH Rewatched AS (
-        SELECT AllMedia.mediaID AS 'mediaID', titleJPN, count(rewatch) AS 'rewatchCount'
+        SELECT SetStatus.mediaID AS 'mediaID', count(SetStatus.mediaID) AS 'rewatchCount'
         FROM SetStatus
-        LEFT JOIN AllMedia ON AllMedia.mediaID = SetStatus.mediaID
-        WHERE rewatch = 1
-        GROUP BY mediaID)
-SELECT mediaID, titleJPN, rewatchCount
-FROM Rewatched
+        WHERE rewatch = 1 AND mediaID IS NOT NULL
+        GROUP BY SetStatus.mediaID)
+SELECT AllMedia.mediaID, AllMedia.titleJPN, Rewatched.rewatchCount
+FROM Rewatched JOIN AllMedia ON Rewatched.mediaID = AllMedia.mediaID
 ORDER BY rewatchCount DESC
 LIMIT 20;
 END;//
