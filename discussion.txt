@@ -42,10 +42,23 @@ the data we used was much more malformed than initially expected, due to the fac
 off a website that also does not have much regulation/monitoring. There were several very obscure 
 errors / malformed pieces that required inspection by hand to figure out what the issue was. Some of
 our files were also extremely large and required hours of waiting for the processing to finish. Although
-our code for that portion is not included as part fo the submission, the full version of the process.txt
+our code for that portion is not included as part of the submission, the full version of the process.txt
 from Phase C documents some of it. 
 
+We are also particularly proud of our database schema & design. We put a lot of initial thought
+into the tables & the way they were split up, which made Phase D much easier, because our 
+tables were organized in a way that made sense & made things simple.
+
+Another part that we are proud of is our interface & overall organization & design. It looks pretty good.
+
 Known Issues - 
+
+Currently, our queries for 11, 12, 14 and 15 time out on ugrad because the size of our setStatus table
+means that the queries take too much time. We have confirmed that they work in dbvisualizer, and although 
+we tried to rewrite our queries, they still take too much time. (MostRewatched, for instance, we were able
+to reduce the time it takes from 3.5 minutes to 2, but this still times out). One possibility we considered
+was simply reducing the size of the csv file, but this feels a little bit cheap. We tested it on the small
+version, and it works just fine. 
 
 Extensions - Currently our html menu only allows for the queries that we wrote, so that if
 someone wishes to know something else beyond our queries, they are unable to find out. In
