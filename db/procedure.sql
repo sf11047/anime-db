@@ -442,13 +442,13 @@ END;//
 
 DROP PROCEDURE IF EXISTS DeleteUser //
 
-CREATE PROCEDURE DeleteUser(IN user VARCHAR(255), OUT res VARCHAR(20))
+CREATE PROCEDURE DeleteUser(IN user VARCHAR(255))
 IF EXISTS(SELECT * FROM Users WHERE username = user) THEN
 -- Delete
-        SET res = "User deleted";
+        SELECT "User deleted" AS outMessage;
 ELSE
 -- Error
-        SET res = "User does not exist"
+        SELECT "User does not exist" AS outMessage;
 END IF;
 SELECT @res;
 END;//

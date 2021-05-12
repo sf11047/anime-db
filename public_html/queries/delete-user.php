@@ -15,7 +15,7 @@ include '../php/open.php';
     $stmt->execute();
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        echo "<h2> Show: ".$row['@res']."</h2>";
+        echo "<h2> Show: ".$row['message']."</h2>";
     }
 
 //End Query PHP Code
