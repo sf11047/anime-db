@@ -10,7 +10,7 @@ include '../php/open.php';
     $genre = $_POST['genre'];
     $desc = $_POST['desc'];
 
-    $myQuery = "Call CreateGenre(?);";
+    $myQuery = "Call CreateGenre(?,?);";
     $stmt = $conn->prepare($myQuery); 
     $stmt->bind_param("s", $genre, $desc);
     $stmt->execute();
