@@ -53,7 +53,7 @@ Another part that we are proud of is our interface & overall organization & desi
 
 Known Issues - 
 
-Currently, our queries for 11, 12, 14 and 15 time out on ugrad because the size of our setStatus table
+Currently, our queries for 11, 12, 14 and 15 time out on ugrad because the size of our SetStatus and Review tables
 means that the queries take too much time. We have confirmed that they work in dbvisualizer, and although 
 we tried to rewrite our queries, they still take too much time. (MostRewatched, for instance, we were able
 to reduce the time it takes from 3.5 minutes to 2, but this still times out). One possibility we considered
